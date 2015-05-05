@@ -5,6 +5,8 @@
   "dependencies": {
     "express": "^4.12.3",
     "gulp-nodemon": "^2.0.3",
+    "react": "^0.13.2",
+    "reflux": "^0.2.7",
     "request": "^2.55.0"
   }
 }

@@ -8,7 +8,7 @@ var actions = Reflux.createActions({
 });
 
 actions.getBikes.listen(() => {
-  request('http://localhost:3001/bikes', (err, resp) => {
+  request(window.location.origin + '/bikes', (err, resp) => {
     if (err) return actions.getBikes.failed(err);
     parseString(resp.body, {
           valueProcessors: [parseNumbers],
