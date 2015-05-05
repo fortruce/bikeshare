@@ -1,0 +1,10 @@
+{
+  "name": "bikeshare",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "express": "^4.12.3",
+    "gulp-nodemon": "^2.0.3",
+    "request": "^2.55.0"
+  }
+}
