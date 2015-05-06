@@ -57,8 +57,14 @@ var BikeMap = React.createClass({
 
     this.map = new google.maps.Map(this.refs.map_canvas.getDOMNode(), {
       zoom: 12,
-      center: new google.maps.LatLng(38.88, -77.01)
+      center: {lat: 38.88, lng: -77.01}
     });
+
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.map.panTo({lat: position.coords.latitude, lng: position.coords.longitude});
+      });
+    }
 
     this.updateTimer = new UpdateTimer(this.map);
   },
