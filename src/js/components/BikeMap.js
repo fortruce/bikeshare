@@ -1,6 +1,7 @@
 var React =require('react');
 var Reflux = require('reflux');
 var BikeStore = require('../stores/BikeStore');
+var Marker = require('../components/Marker');
 
 var actions = require('../actions/actions');
 
@@ -34,10 +35,10 @@ function haversineDistance(a, b) {
   var blng = radians(b.lng);
   var deltaLat = blat - alat;
   var deltaLng = blng - alng;
-  var a = Math.sin(deltaLat/2)*Math.sin(deltaLat/2) +
+  var aa = Math.sin(deltaLat/2)*Math.sin(deltaLat/2) +
           Math.sin(deltaLng/2)*Math.sin(deltaLng/2) *
           Math.cos(alat) * Math.cos(blat);
-  var c = 2*Math.asin(Math.sqrt(a));
+  var c = 2*Math.asin(Math.sqrt(aa));
   return r * c;
 }
 
@@ -62,51 +63,6 @@ function testDistance() {
     console.log(s.name);
   });
 }
-
-function Marker(station, map) {
-  this.id = station.id;
-  this.map = map;
-  this.position = {lat: station.lat, lng: station.long};
-
-  this.marker = new google.maps.Marker({
-    position: this.position,
-    icon: getIcon(station.nbBikes, station.nbEmptyDocks),
-    map: map
-  });
-
-  this.info = new google.maps.InfoWindow({
-    content: station.name + '\n' + station.nbBikes + '/' + (station.nbBikes + station.nbEmptyDocks)
-  });
-
-  google.maps.event.addListener(this.info, 'closeclick', this.toggleInfo.bind(this));
-  google.maps.event.addListener(this.marker, 'click', this.toggleInfo.bind(this));
-  google.maps.event.addListener(this.marker, 'click', testDistance.bind(this));
-  google.maps.event.addListener(this.marker, 'mouseover', this.toggleInfo.bind(this));
-  google.maps.event.addListener(this.marker, 'mouseout', this.toggleInfo.bind(this));
-}
-
-Marker.prototype.toggleInfo = function() {
-  if (this.infoEnabled)
-    this.info.close();
-  else
-    this.info.open(this.map, this.marker);
-  this.infoEnabled = !this.infoEnabled;
-};
-
-Marker.prototype.remove = function() {
-  this.marker.setMap(null);
-};
-
-Marker.prototype.destroy = function() {
-  this.remove();
-  google.maps.event.clearInstanceListeners(this.marker);
-  google.maps.event.clearInstanceListeners(this.info);
-};
-
-Marker.prototype.update = function(station) {
-  this.marker.setIcon(getIcon(station.nbBikes, station.nbEmptyDocks));
-  this.info.setContent(station.name + '\n' + station.nbBikes + '/' + (station.nbBikes + station.nbEmptyDocks));
-};
 
 function padZero(s) {
   if (s < 10)
@@ -165,7 +121,7 @@ var BikeMap = React.createClass({
       this.updateTimer.update(nstate.lastUpdate);
     }
 
-    for (var id in nstate.stations) {
+    for (id in nstate.stations) {
       if (id in this.state.stations)
         this.markers[id].update(nstate.stations[id]);
       else
