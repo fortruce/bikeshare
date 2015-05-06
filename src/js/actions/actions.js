@@ -10,17 +10,7 @@ var actions = Reflux.createActions({
 actions.getBikes.listen(() => {
   request(window.location.origin + '/bikes', (err, resp) => {
     if (err) return actions.getBikes.failed(err);
-    parseString(resp.body, {
-          valueProcessors: [parseNumbers],
-          explicitArray: false
-        }, (err, json) => {
-          if (err) return actions.getBikes.failed(err);
-          var res = Object.create(null);
-          json.stations.station.forEach((s) => {
-            res[s.id] = s;
-          });
-          actions.getBikes.completed({stations: res});
-        });
+    actions.getBikes.completed(JSON.parse(resp.body));
   });
 });
 
