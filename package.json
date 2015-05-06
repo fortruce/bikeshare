@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prestart": "gulp build",
+    "postinstall": "gulp build",
     "start": "node src/server.js"
   },
   "dependencies": {
