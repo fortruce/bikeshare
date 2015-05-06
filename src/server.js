@@ -11,4 +11,4 @@ app.get('/bikes', function(req, res) {
       .pipe(res);
 });
 
-var server = app.listen(80);
+var server = app.listen(process.env.PORT || 3000);
