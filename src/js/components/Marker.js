@@ -16,6 +16,10 @@ function getIcon(bikes, empty) {
   };
 }
 
+function getContent(station) {
+  return station.name + '\r\n' + station.nbBikes + '/' + (station.nbBikes + station.nbEmptyDocks);
+}
+
 function Marker(station, map) {
   this.id = station.id;
   this.map = map;
@@ -28,7 +32,7 @@ function Marker(station, map) {
   });
 
   this.info = new google.maps.InfoWindow({
-    content: station.name + '\n' + station.nbBikes + '/' + (station.nbBikes + station.nbEmptyDocks)
+    content: getContent(station)
   });
 
   google.maps.event.addListener(this.info, 'closeclick', this.close.bind(this));
@@ -64,19 +68,17 @@ Marker.prototype.toggleInfo = function() {
   return;
 };
 
-Marker.prototype.remove = function() {
-  this.marker.setMap(null);
-};
-
 Marker.prototype.destroy = function() {
-  this.remove();
+  this.marker.setMap(null);
+  this.info.close();
+
   google.maps.event.clearInstanceListeners(this.marker);
   google.maps.event.clearInstanceListeners(this.info);
 };
 
 Marker.prototype.update = function(station) {
   this.marker.setIcon(getIcon(station.nbBikes, station.nbEmptyDocks));
-  this.info.setContent(station.name + '\n' + station.nbBikes + '/' + (station.nbBikes + station.nbEmptyDocks));
+  this.info.setContent(getContent(station));
 };
 
 module.exports = Marker;

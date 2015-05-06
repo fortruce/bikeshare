@@ -2,26 +2,9 @@ var React =require('react');
 var Reflux = require('reflux');
 var BikeStore = require('../stores/BikeStore');
 var Marker = require('../components/Marker');
+var UpdateTimer = require('../components/UpdateTimer');
 
 var actions = require('../actions/actions');
-
-function getIcon(bikes, empty) {
-  var fillColor = 'green';
-  if (bikes < 3)
-    fillColor = 'orange';
-  if (bikes === 0)
-    fillColor = 'white';
-  if (empty === 0)
-    fillColor = 'purple';
-
-  return {
-    path: google.maps.SymbolPath.CIRCLE,
-    scale: 10,
-    fillColor: fillColor,
-    strokeWeight: 2,
-    fillOpacity: 1
-  };
-}
 
 function radians(deg) {
   return deg/180.0 * Math.PI;
@@ -64,36 +47,6 @@ function testDistance() {
   });
 }
 
-function padZero(s) {
-  if (s < 10)
-    return '0' + s;
-  return s;
-}
-
-function secondsToString(time) {
-  var seconds = time % 60;
-  var minutes = Math.floor(time / 60);
-  var hours = Math.floor(minutes / 60);
-  return padZero(hours) + ':' + padZero(minutes) + ':' + padZero(seconds);
-}
-
-function UpdateTimer(map) {
-  this.time = 0;
-  this.timer = document.createElement('div');
-  this.timer.textContent = secondsToString(this.time);
-  this.timer.className = 'timer';
-  this.interval = setInterval(() => {
-    this.time++;
-    this.timer.textContent = secondsToString(this.time);
-  }, 1000);
-
-  map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(this.timer);
-}
-
-UpdateTimer.prototype.update = function() {
-  this.time = 0;
-};
-
 var _stations = [];
 
 var BikeMap = React.createClass({
@@ -107,18 +60,12 @@ var BikeMap = React.createClass({
       center: new google.maps.LatLng(38.88, -77.01)
     });
 
-    this.lastUpdate = Date.now();
     this.updateTimer = new UpdateTimer(this.map);
-    setTimeout(actions.getBikes, 1000);
   },
   shouldComponentUpdate(nprops, nstate) {
     _stations = [];
     for (var id in nstate.stations) {
       _stations.push(nstate.stations[id]);
-    }
-    if (this.lastUpdate < nstate.lastUpdate) {
-      this.lastUpdate = nstate.lastUpdate;
-      this.updateTimer.update(nstate.lastUpdate);
     }
 
     for (id in nstate.stations) {
