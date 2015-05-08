@@ -16,6 +16,9 @@ function xmlToJson(xml, callback) {
     xml,
     {
       valueProcessors: [parseNumbers],
+      tagNameProcessors: [function (name) {
+        return name === "long" ? "lng" : name;
+      }],
       explicitArray: false
     },
     function (err, json) {

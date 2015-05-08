@@ -7,7 +7,7 @@ var BikeStore = Reflux.createStore({
 
   getInitialState() {
     return {
-      stations: {},
+      stations: [],
       lastUpdated: Date.now()
     };
   },

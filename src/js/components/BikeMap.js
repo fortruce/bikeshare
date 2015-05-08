@@ -3,6 +3,7 @@ var Reflux = require('reflux');
 var BikeStore = require('../stores/BikeStore');
 var Marker = require('../components/Marker');
 var UpdateTimer = require('../components/UpdateTimer');
+var UpdateTimerNew = require('../components/UpdateTimerNew');
 
 var actions = require('../actions/actions');
 
@@ -28,7 +29,7 @@ function haversineDistance(a, b) {
 function sortPointsToDest(dest, points) {
   var distances = Object.create(null);
   points.forEach((s) => {
-    var p = {lat: s.lat, lng: s.long};
+    var p = {lat: s.lat, lng: s.lng};
     distances[s.id] = haversineDistance(p, dest);
   });
   return points.sort((a, b) => {
@@ -47,11 +48,10 @@ function testDistance() {
   });
 }
 
-var _stations = [];
-
 var BikeMap = React.createClass({
   mixins: [Reflux.connect(BikeStore)],
   componentDidMount() {
+    this.mounted = true;
     this.markers = {};
     this.info = {};
 
@@ -69,11 +69,10 @@ var BikeMap = React.createClass({
     this.updateTimer = new UpdateTimer(this.map);
   },
   shouldComponentUpdate(nprops, nstate) {
-    _stations = [];
-    for (var id in nstate.stations) {
-      _stations.push(nstate.stations[id]);
+    if (this.mounted && !this.updated) {
+      this.updated = true;
+      return true;
     }
-
     for (id in nstate.stations) {
       if (id in this.state.stations)
         this.markers[id].update(nstate.stations[id]);
@@ -93,6 +92,7 @@ var BikeMap = React.createClass({
   render() {
     return (
       <div id="map_canvas" ref="map_canvas">
+        {this.updated ? <UpdateTimerNew map={this.map}/> : ""}
       </div>
     );
   }

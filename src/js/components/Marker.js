@@ -23,7 +23,7 @@ function getContent(station) {
 function Marker(station, map) {
   this.id = station.id;
   this.map = map;
-  this.position = {lat: station.lat, lng: station.long};
+  this.position = {lat: station.lat, lng: station.lng};
 
   this.marker = new google.maps.Marker({
     position: this.position,
