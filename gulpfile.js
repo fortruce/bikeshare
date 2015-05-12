@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-// var browserify = require('gulp-browserify');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var browserSync = require('browser-sync').create();
