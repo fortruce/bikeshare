@@ -11,7 +11,8 @@ var BikeMap = React.createClass({
   render() {
     var markers = this.state.stations.map((s) => {
       return (<Marker position={{lat: s.lat, lng: s.lng}}
-                      title={s.name} />);
+                      title={s.name}
+                      key={s.id} />);
     });
     return (
       <Map  style={{height: '100%'}}
