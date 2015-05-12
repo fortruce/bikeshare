@@ -11,7 +11,6 @@ var _bikes;
 var _err;
 
 function xmlToJson(xml, callback) {
-  var res = Object.create(null);
   parseString(
     xml,
     {
@@ -23,11 +22,8 @@ function xmlToJson(xml, callback) {
     },
     function (err, json) {
       if (err) return callback(err);
-      json.stations.station.forEach(function (s) {
-        res[s.id] = s;
-      });
       return callback(undefined, {
-        stations: res,
+        stations: json.stations.station,
         lastUpdate: json.stations.$.lastUpdate
       });
     }

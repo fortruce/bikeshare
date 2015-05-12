@@ -20,7 +20,6 @@ module.exports = {
   'Polygon':    reactMapComponent('Polygon'),
   'InfoWindow': reactMapComponent('InfoWindow', {
     componentDidMount() {
-      console.log('mount');
       this.props.open(this._component);
     },
     _destroy() {
