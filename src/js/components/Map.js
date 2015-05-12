@@ -1,5 +1,6 @@
 var React = require('react');
 var keyMirror = require('react/lib/keyMirror');
+var InjectMap = require('../components/InjectMap');
 
 var States = keyMirror({
   PENDING: null,
@@ -33,16 +34,12 @@ var Map = React.createClass({
   },
 
   render: function() {
-    var children;
-
-    // Once the Map is mounted - mount the children elements inside
-    // pass all the children the map instance thru props
+    var children = [];
     if (this.state.state === States.MAP_CREATED) {
-      children = React.Children.map(this.props.children, (child) => {
-        return React.cloneElement(child, {map: this._map});
-      });
+      children = (<InjectMap map={this._map}>
+                    {this.props.children}
+                  </InjectMap>);
     }
-
     return(
       <div  ref="mapHolder"
             style={this.props.style}
