@@ -3,6 +3,8 @@ var React = require('react');
 var Events = require('../utils/ReactEvents');
 var Options = require('../utils/ReactOptions');
 
+var deepEqual = require('deep-equal');
+
 module.exports = {
   componentDidMount() {
     this._component = new this.componentConstructor();
@@ -28,7 +30,7 @@ module.exports = {
 
     // Set all previous properties to null to be deleted
     for (var prop in this.props) {
-      if (propKey in Options)
+      if (propKey in Options && !(prop in nextProps))
         options[propKey] = null;
       else if (propKey in Events)
         events[propKey] = null;
@@ -36,8 +38,10 @@ module.exports = {
 
     // Set all new options/events
     for (var propKey in nextProps) {
-      if (propKey in Options)
-        options[propKey] = nextProps[propKey];
+      if (propKey in Options) {
+        if (force || !deepEqual(this.props[propKey], nextProps[propKey]))
+          options[propKey] = nextProps[propKey];
+      }
       else if (propKey in Events) {
         if (nextProps[propKey] === this.props[propKey] && !force)
           delete events[propKey];
@@ -51,7 +55,8 @@ module.exports = {
   },
 
   _updateOptions(options) {
-    this._component.setOptions(options);
+    if (Object.keys(options).length !== 0)
+      this._component.setOptions(options);
   },
 
   _updateEvents(events) {
