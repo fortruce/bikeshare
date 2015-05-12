@@ -5,8 +5,8 @@ var InjectMap = require('../components/InjectMap');
 var InfoMarker = React.createClass({
   getInitialState() {
     return {
-      info: false,
-      click: false
+      state: 'show',
+      marker: undefined
     };
   },
   componentDidMount() {
@@ -20,7 +20,7 @@ var InfoMarker = React.createClass({
       info = (<InfoWindow ref="info"
                           open={this.showInfo}
                           close={this.hideInfo}
-                          closeclick={this.infoClose} />);
+                          closeclick={this.markerClick} />);
 
     return (
       <InjectMap map={this.props.map}>
@@ -34,42 +34,62 @@ var InfoMarker = React.createClass({
     );
   },
   showInfo(component) {
-    console.log('show');
     component = component || this.refs.info.getMapNode();
-    component.open(this.map, this.refs.marker);
+    component.open(this.props.map, this.refs.marker.getMapNode());
   },
   hideInfo(component) {
     component = component || this.refs.info.getMapNode();
     component.close();
   },
-  componentWillUpdate(nProps, nState) {
-    if (this.state.info !== nState.info) {
-      if (this.state.info)
-        this.showInfo();
-      else
-        this.hideInfo();
+  shouldComponentUpdate(nProps, nState) {
+    if (this.state.marker === undefined)
+      return true;
+    switch(this.state.state) {
+    case 'hover':
+    case 'show':
+      return nState.state === 'hide';
+      break;
+    case 'hide':
+      return nState.state !== 'hide';
+      break;
+    }
+    return false;
+  },
+  componentDidUpdate(pProps, pState) {
+    switch (this.state.state) {
+    case 'show':
+    case 'hover':
+      this.showInfo();
+      break;
+    case 'hide':
+      this.hideInfo();
+      break;
     }
   },
   mouseOver() {
-    this.setState({info: true});
+    switch (this.state.state) {
+      case 'hide':
+        this.setState({state: 'hover'});
+        break;
+    }
   },
   mouseOut() {
-    if (!this.state.click)
-      this.setState({info: false});
+    switch (this.state.state) {
+      case 'hover':
+        this.setState({state: 'hide'});
+        break;
+    }
   },
   markerClick() {
-    console.log('marker click');
-    this.setState({
-      info: !this.state.info,
-      click: !this.state.click
-    });
-  },
-  infoClose() {
-    console.log('info closeclick');
-    this.setState({
-      info: false,
-      click: false
-    });
+    switch (this.state.state) {
+      case 'hover':
+      case 'hide':
+        this.setState({state: 'show'});
+        break;
+      case 'show':
+        this.setState({state: 'hide'});
+        break;
+    }
   }
 });
 
