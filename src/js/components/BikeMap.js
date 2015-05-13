@@ -17,7 +17,7 @@ function getIcon(bikes, empty) {
 
   return {
     path: google.maps.SymbolPath.CIRCLE,
-    scale: 10,
+    scale: 8,
     fillColor: fillColor,
     strokeWeight: 2,
     fillOpacity: 1

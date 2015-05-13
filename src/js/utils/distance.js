@@ -14,19 +14,19 @@ function haversineDistance(a, b) {
           Math.sin(deltaLng/2)*Math.sin(deltaLng/2) *
           Math.cos(alat) * Math.cos(blat);
   var c = 2*Math.asin(Math.sqrt(aa));
-  return r * c;
+  return kmToMi(r * c);
 }
 
 function sortPointsToDest(dest, points) {
-  var distances = Object.create(null);
-  points.forEach((s) => {
-    var p = {lat: s.lat, lng: s.lng};
-    distances[s.id] = haversineDistance(p, dest);
+  points.map((s) => {
+    s.distance = haversineDistance(s, dest);
+    return s;
   });
+
   return points.sort((a, b) => {
-    if (distances[a.id] < distances[b.id])
+    if (a.distance < b.distance)
       return -1;
-    else if (distances[a.id] > distances[b.id])
+    else if (a.distance > b.distance)
       return 1;
     return 0;
   });
@@ -38,3 +38,13 @@ function testDistance() {
     console.log(s.name);
   });
 }
+
+function kmToMi(km) {
+  return km * 0.621371;
+}
+
+module.exports = {
+  haversine: haversineDistance,
+  sortByDistance: sortPointsToDest,
+  kmToMi: kmToMi
+};
