@@ -5,6 +5,7 @@ var actions = require('../actions/actions');
 
 var Map = require('../components/Map');
 var {Marker} = require('../components/MapComponents');
+var InfoMarker = require('../components/InfoMarker');
 
 function getIcon(bikes, empty) {
   var fillColor = 'green';
@@ -32,10 +33,12 @@ var BikeMap = React.createClass({
   mixins: [Reflux.connect(BikeStore)],
   render() {
     var markers = this.state.stations.map((s) => {
-      return (<Marker position={{lat: s.lat, lng: s.lng}}
-                      title={s.name}
-                      icon={getIcon(s.nbBikes, s.nbEmptyDocks)}
-                      key={s.id} />);
+      return (<InfoMarker marker={{
+                            position: {lat: s.lat, lng: s.lng},
+                            icon: getIcon(s.nbBikes, s.nbEmptyDocks)
+                          }}
+                          info={{content: getContent(s)}}
+                          key={s.id} />);
     });
     return (
       <Map  style={{height: '100%'}}

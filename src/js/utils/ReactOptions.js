@@ -4,5 +4,6 @@ module.exports = keyMirror({
   'title': null,
   'position': null,
   'icon': null,
+  'content': null,
   'map': null
 });

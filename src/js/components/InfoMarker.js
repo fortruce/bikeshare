@@ -5,7 +5,7 @@ var InjectMap = require('../components/InjectMap');
 var InfoMarker = React.createClass({
   getInitialState() {
     return {
-      state: 'show',
+      state: 'hide',
       marker: undefined
     };
   },
@@ -20,7 +20,8 @@ var InfoMarker = React.createClass({
       info = (<InfoWindow ref="info"
                           open={this.showInfo}
                           close={this.hideInfo}
-                          closeclick={this.markerClick} />);
+                          closeclick={this.markerClick}
+                          {...this.props.info} />);
 
     return (
       <InjectMap map={this.props.map}>
@@ -34,8 +35,10 @@ var InfoMarker = React.createClass({
     );
   },
   showInfo(component) {
-    component = component || this.refs.info.getMapNode();
-    component.open(this.props.map, this.refs.marker.getMapNode());
+    if (this.state.state !== 'hide') {
+      component = component || this.refs.info.getMapNode();
+      component.open(this.props.map, this.refs.marker.getMapNode());
+    }
   },
   hideInfo(component) {
     component = component || this.refs.info.getMapNode();
