@@ -31,6 +31,11 @@ function getContent(station) {
 
 var BikeMap = React.createClass({
   mixins: [Reflux.connect(BikeStore)],
+  statics: {
+    willTransitionTo() {
+      actions.getBikes();
+    }
+  },
   render() {
     var markers = this.state.stations.map((s) => {
       return (<InfoMarker marker={{

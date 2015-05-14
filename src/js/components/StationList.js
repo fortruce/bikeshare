@@ -1,10 +1,12 @@
 var React = require('react');
-var { State } = React;
+var { State } = require('react-router');
 var Reflux = require('reflux');
 
 var BikeStore = require('../stores/BikeStore');
 
 var { sortByDistance, kmToMi } = require('../utils/distance');
+
+var actions = require('../actions/actions');
 
 var Station = React.createClass({
   render() {
@@ -20,30 +22,36 @@ var Station = React.createClass({
 
 var StationList = React.createClass({
   mixins: [
-    Reflux.connect(BikeStore)
+    Reflux.connect(BikeStore),
+    State
   ],
 
-  getInitialState() {
-    return {position: {lat: 38.88, lng: -77.01}};
-  },
-
-  componentWillMount() {
-    navigator.geolocation.watchPosition((p) => {
-      this.setState({position: {lat: p.coords.latitude, lng: p.coords.longitude}});
-    }, undefined, {timeout: 3000});
+  statics: {
+    willTransitionTo() {
+      actions.getBikes();
+    }
   },
 
   render() {
-    var stations = sortByDistance(this.state.position, this.state.stations).slice(0,10);
+    var stations = sortByDistance(this.latLng(), this.state.stations).slice(0,10);
     stations = stations.map((s) => {
       return (<Station state={s} key={s.id} />);
     });
     return (
-      <div>
-        Hello World
-        {stations}
+      <div className="row">
+        <div className="small-offset-3 small-6 column">
+          {stations}
+        </div>
       </div>
     );
+  },
+
+  latLng() {
+    var coords = this.getParams().location.split(':');
+    return {
+      lat: parseFloat(coords[0]),
+      lng: parseFloat(coords[1])
+    }
   }
 });
 

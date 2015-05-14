@@ -3,6 +3,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var browserSync = require('browser-sync').create();
 var nodemon = require('gulp-nodemon');
+var sass = require('gulp-sass');
 var reload = browserSync.reload;
 
 var paths = {
@@ -11,8 +12,18 @@ var paths = {
   buildJs: 'build/js/',
   html: 'src/index.html',
   build: 'build/',
-  server: './src/server.js'
+  server: './src/server.js',
+  scss: 'src/scss/main.scss',
+  scssDir: 'src/scss/**/*.scss',
+  css: 'build/css/'
 }
+
+gulp.task('scss', function () {
+  gulp.src(paths.scss)
+      .pipe(sass())
+      .pipe(gulp.dest(paths.css))
+      .pipe(reload({stream: true}))
+});
 
 gulp.task('browserify', function () {
   var b = browserify({
@@ -31,9 +42,10 @@ gulp.task('html', function() {
       .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('watch', ['browserify', 'html'], function () {
+gulp.task('watch', ['build'], function () {
   gulp.watch(paths.src, ['browserify']);
   gulp.watch(paths.html, ['html']);
+  gulp.watch(paths.scssDir, ['scss']);
 
   gulp.watch(paths.buildJs + '*.js').on('change', reload);
   gulp.watch(paths.build + '*.html').on('change', reload);
@@ -46,7 +58,7 @@ gulp.task('server', function() {
   }).on('start', reload);
 });
 
-gulp.task('build', ['browserify', 'html']);
+gulp.task('build', ['browserify', 'html', 'scss']);
 
 gulp.task('browserSync', ['server', 'watch'], function() {
   browserSync.init({
