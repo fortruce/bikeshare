@@ -51,7 +51,7 @@ var LocationResults = React.createClass({
     });
     return (
       <div className="row">
-        <div className="small-offset-3 small-6 column">
+        <div className="column small-10 small-offset-1 large-8 large-offset-2">
           {stations}
         </div>
       </div>

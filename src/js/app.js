@@ -10,8 +10,20 @@ var LocationResults = require('./components/LocationResults');
 var LocationBar = require('./components/LocationBar');
 var SearchResults = require('./components/SearchResults');
 
+var App = React.createClass({
+  render() {
+    return (
+      <div className="row">
+        <div className="column small-12 large-8 large-offset-2">
+          <RouteHandler/>
+        </div>
+      </div>
+    );
+  }
+});
+
 var routes = (
-  <Route path="/">
+  <Route path="/" handler={App}>
     <DefaultRoute handler={LocationBar} />
     <Route name="near" path="near" handler={LocationBar}>
       <Route name="location" path="location/:location" handler={LocationResults} />

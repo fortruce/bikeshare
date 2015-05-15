@@ -43,9 +43,7 @@ var LocationBar = React.createClass({
     var buttonClass = this.state.tracking ? "" : " secondary";
     return (
       <div>
-        <div className="row">
-          <form className="large-offset-3 large-6 column"
-                onSubmit={this.searchLocation}>
+          <form  onSubmit={this.searchLocation}>
             <div className="row collapse">
               <div className="small-2 column">
                 <a className={"button prefix" + buttonClass}
@@ -55,13 +53,11 @@ var LocationBar = React.createClass({
                 <input  ref="search"
                         value={this.state.search}
                         onChange={() => this.setState({search: this.refs.search.getDOMNode().value})}
-                        className="small-9 columns"
                         type="text"
                         placeholder="Location" />
               </div>
             </div>
           </form>
-        </div>
         <RouteHandler/>
       </div>
     );

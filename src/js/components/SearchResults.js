@@ -19,7 +19,7 @@ var SearchResults = React.createClass({
   render() {
     var results = this.state.results.map((r) => {
       return (
-        <div>
+        <div key={r.place_id}>
           <Link to="location"
             params={{
               location: r.geometry.location.toUrlValue()
@@ -33,7 +33,7 @@ var SearchResults = React.createClass({
     if (this.state.results.length > 0)
       return (
         <div className="row">
-          <div className="column small-offset-3 small-6">
+          <div className="column small-10 small-offset-1 large-8 large-offset-2">
             <h3 className="align-center">Search Results</h3>
             {results}
           </div>
