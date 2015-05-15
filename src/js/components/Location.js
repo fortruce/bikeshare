@@ -9,27 +9,40 @@ var actions = require('../actions/actions');
 
 var Location = React.createClass({
   mixins: [Reflux.connect(LocationStore)],
+  contextTypes: {
+    router: React.PropTypes.func
+  },
   statics: {
     willTransitionTo(t, params) {
-      // If no location is specified, then default to tracking the geolocation
       if (!params.location) {
-        actions.trackLocation();
+        console.log('location willTransitionTo')
+        var state = LocationStore.getState();
+        if (state.location)
+          t.redirect('near', {
+            location: state.location.lat + ':' + state.location.lng
+          });
       }
     }
+  },
+  componentDidMount() {
+    console.log('location mount');
+    actions.trackLocation();
   },
   render() {
     var buttonClass = this.state.tracking ? "" : " secondary";
     return (
       <div>
         <div className="row">
-          <form className="large-offset-3 large-6 column">
+          <form className="large-offset-3 large-6 column"
+                onSubmit={this.searchLocation}>
             <div className="row collapse">
               <div className="small-2 column">
                 <a className={"button prefix" + buttonClass}
                    onClick={this.currentLocation} >#</a>
               </div>
               <div className="small-10 column">
-                <input  className="small-9 columns"
+                <input  ref="geocode"
+                        className="small-9 columns"
                         type="text"
                         placeholder="Location" />
               </div>
@@ -39,6 +52,14 @@ var Location = React.createClass({
         <RouteHandler/>
       </div>
     );
+  },
+  searchLocation(e) {
+    e.preventDefault();
+    if (this.state.tracking)
+      actions.stopTrackLocation();
+    this.context.router.transitionTo('near', {
+      location: '38.88:-77.01'
+    });
   },
   currentLocation() {
     if (!this.state.tracking) {

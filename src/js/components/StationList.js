@@ -28,6 +28,7 @@ var StationList = React.createClass({
 
   statics: {
     willTransitionTo() {
+      console.log('list willTransitionTo');
       actions.getBikes();
     }
   },

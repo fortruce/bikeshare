@@ -1,26 +1,46 @@
 var Reflux = require('reflux');
 var actions = require('../actions/actions');
 
+var _loc;
+var _tracking = false;
+
 var LocationStore = Reflux.createStore({
   listenables: actions,
 
   getInitialState() {
+    return this.getState();
+  },
+
+  getState() {
     return {
-      location: undefined,
-      tracking: false
-    };
+      location: _loc,
+      tracking: _tracking
+    }
+  },
+
+  onTrackLocation() {
+    _tracking = true;
+    this.trigger({tracking: _tracking});
   },
 
   onTrackLocationCompleted() {
-    this.trigger({tracking: true});
+    _tracking = true;
+    this.trigger({tracking: _tracking});
+  },
+
+  onTrackLocationFailed() {
+    _tracking = false;
+    this.trigger({tracking: _tracking});
   },
 
   onLocationChange(loc) {
-    this.trigger({location: loc});
+    _loc = loc;
+    this.trigger({location: _loc});
   },
 
   onStopTrackLocation() {
-    this.trigger({tracking: false});
+    _tracking = false;
+    this.trigger({tracking: _tracking});
   }
 });
 

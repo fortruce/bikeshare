@@ -17,38 +17,26 @@ var actions = Reflux.createActions({
 });
 
 var watchId;
-var loc;
 
 actions.trackLocation.listen(() => {
   function positionError(perror) {
     actions.error(perror.message);
+    actions.trackLocation.failed();
   }
 
   function triggerPos(p) {
-    loc = {
+    actions.locationChange({
       lat: p.coords.latitude,
       lng: p.coords.longitude
-    };
-    actions.locationChange(loc);
+    });
     actions.trackLocation.completed();
   }
 
   if ('geolocation' in navigator) {
-    if (watchId) {
-      if (loc) {
-        actions.locationChange(loc);
-        actions.trackLocation.completed();
-        return;
-      }
-      else {
-        return navigator.geolocation.getCurrentPosition(triggerPos, positionError);
-      }
-    } else {
-      watchId = navigator.geolocation.watchPosition(triggerPos, positionError);
-      return;
-    }
+    watchId = navigator.geolocation.watchPosition(triggerPos, positionError);
   } else {
     actions.error('Your device does not support geolocation.');
+    actions.trackLocation.failed();
   }
 });
 
