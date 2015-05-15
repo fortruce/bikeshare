@@ -7,13 +7,7 @@ var GeocodeStore = Reflux.createStore({
     return {results: []};
   },
 
-  onGeocode(address) {
-    console.log('geocode:', address);
-  },
-
   onGeocodeCompleted(results) {
-    console.log('completed');
-    console.log(results);
     this.trigger({results: results});
   },
 
