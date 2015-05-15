@@ -82,7 +82,7 @@ actions.geocode.listen((address) => {
   geocoder.geocode({address: address}, (results, status) => {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results.length === 1) {
-        return RouterContainer.get().transitionTo('location', {
+        return RouterContainer.get().replaceWith('location', {
           location: results[0].geometry.location.toUrlValue()
         }, {
           search: (new Buffer(results[0].formatted_address)).toString('base64')
