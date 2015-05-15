@@ -13,35 +13,48 @@ var actions = Reflux.createActions({
 
   'locationChange': {},
 
+  'geocode': {asyncResult: true},
+
   'error': {}
 });
 
 var watchId;
+var _currLoc;
 
 actions.trackLocation.listen(() => {
-  function positionError(perror) {
-    actions.error(perror.message);
-    actions.trackLocation.failed();
+  function trackLocation() {
+    watchId = navigator.geolocation.watchPosition((pos) => {
+      _currLoc = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude
+      };
+      actions.locationChange(_currLoc, true);
+    }, (error) => {
+      actions.trackLocation.failed(error);
+      actions.error(error.message);
+    });
   }
 
-  function triggerPos(p) {
-    actions.locationChange({
-      lat: p.coords.latitude,
-      lng: p.coords.longitude
-    });
-    actions.trackLocation.completed();
+  if (_currLoc) {
+    actions.locationChange(_currLoc, true);
+    if (!watchId) {
+      trackLocation();
+    }
+    return;
   }
 
   if ('geolocation' in navigator) {
-    watchId = navigator.geolocation.watchPosition(triggerPos, positionError);
+    trackLocation();
   } else {
     actions.error('Your device does not support geolocation.');
     actions.trackLocation.failed();
   }
 });
 
-actions.locationChange.listen((loc) => {
-  RouterContainer.get().transitionTo('near', {location: loc.lat + ':' + loc.lng});
+actions.locationChange.listen((loc, tracking) => {
+  RouterContainer.get().transitionTo('location', {
+    location: loc.lat + ',' + loc.lng
+  }, {tracking: tracking});
 });
 
 actions.stopTrackLocation.listen(() => {
@@ -60,6 +73,25 @@ actions.getBikes.listen(() => {
   request(window.location.origin + '/bikes', (err, resp) => {
     if (err) return actions.getBikes.failed(err);
     actions.getBikes.completed(JSON.parse(resp.body));
+  });
+});
+
+var geocoder = new google.maps.Geocoder();
+
+actions.geocode.listen((address) => {
+  geocoder.geocode({address: address}, (results, status) => {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results.length === 1) {
+        return RouterContainer.get().transitionTo('location', {
+          location: results[0].geometry.location.toUrlValue()
+        }, {
+          search: (new Buffer(results[0].formatted_address)).toString('base64')
+        });
+      }
+      actions.geocode.completed(results);
+    } else {
+      actions.geocode.failed(status);
+    }
   });
 });
 

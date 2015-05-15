@@ -2,31 +2,42 @@ var React = require('react');
 var Reflux = require('reflux');
 
 var Router = require('react-router');
-var { RouteHandler } = Router;
+var { RouteHandler, State } = Router;
 var LocationStore = require('../stores/LocationStore');
 
 var actions = require('../actions/actions');
 
-var Location = React.createClass({
-  mixins: [Reflux.connect(LocationStore)],
+var LocationBar = React.createClass({
+  mixins: [Reflux.connect(LocationStore), State],
   contextTypes: {
     router: React.PropTypes.func
   },
   statics: {
-    willTransitionTo(t, params) {
-      if (!params.location) {
-        console.log('location willTransitionTo')
-        var state = LocationStore.getState();
-        if (state.location)
-          t.redirect('near', {
-            location: state.location.lat + ':' + state.location.lng
-          });
+    willTransitionTo(t, params, query) {
+      // turn on tracking if no search or location is queried
+      // if already tracking, trackLocation is garaunteed to trigger
+      // a locationChange to redirect to current location
+      if (!(params.search || params.location) || query.tracking) {
+        actions.trackLocation();
       }
     }
   },
-  componentDidMount() {
-    console.log('location mount');
-    actions.trackLocation();
+  getSearchParam() {
+    if (this.getParams().search)
+      return (new Buffer(this.getParams().search, 'base64')).toString('ascii');
+    if (this.getQuery().search)
+      return (new Buffer(this.getQuery().search, 'base64')).toString('ascii');
+    return '';
+  },
+  getInitialState() {
+    return {
+      search: this.getSearchParam()
+    };
+  },
+  componentWillReceiveProps() {
+    this.setState({
+      search: this.getSearchParam()
+    });
   },
   render() {
     var buttonClass = this.state.tracking ? "" : " secondary";
@@ -41,7 +52,9 @@ var Location = React.createClass({
                    onClick={this.currentLocation} >#</a>
               </div>
               <div className="small-10 column">
-                <input  ref="geocode"
+                <input  ref="search"
+                        value={this.state.search}
+                        onChange={() => this.setState({search: this.refs.search.getDOMNode().value})}
                         className="small-9 columns"
                         type="text"
                         placeholder="Location" />
@@ -55,10 +68,8 @@ var Location = React.createClass({
   },
   searchLocation(e) {
     e.preventDefault();
-    if (this.state.tracking)
-      actions.stopTrackLocation();
-    this.context.router.transitionTo('near', {
-      location: '38.88:-77.01'
+    this.context.router.transitionTo('search', {
+      search: (new Buffer(this.refs.search.getDOMNode().value.trim())).toString('base64')
     });
   },
   currentLocation() {
@@ -70,4 +81,4 @@ var Location = React.createClass({
   }
 });
 
-module.exports = Location;
+module.exports = LocationBar;

@@ -6,14 +6,16 @@ var { Route, RouteHandler, DefaultRoute } = Router;
 var RouterContainer = require('./RouterContainer');
 
 var BikeMap = require('./components/BikeMap');
-var StationList = require('./components/StationList');
-var Location = require('./components/Location');
+var LocationResults = require('./components/LocationResults');
+var LocationBar = require('./components/LocationBar');
+var SearchResults = require('./components/SearchResults');
 
 var routes = (
   <Route path="/">
-    <DefaultRoute handler={Location} />
-    <Route name="location" path="loc" handler={Location}>
-      <Route name="near" path=":location" handler={StationList} />
+    <DefaultRoute handler={LocationBar} />
+    <Route name="near" path="near" handler={LocationBar}>
+      <Route name="location" path="location/:location" handler={LocationResults} />
+      <Route name="search" path="search/:search" handler={SearchResults} />
     </Route>
     <Route name="map" handler={BikeMap} />
   </Route>

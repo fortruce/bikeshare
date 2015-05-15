@@ -8,28 +8,39 @@ var { sortByDistance, kmToMi } = require('../utils/distance');
 
 var actions = require('../actions/actions');
 
+function roundDistance(distance) {
+  distance = Math.round(distance * 100) / 100;
+  if (distance.toString().split('.')[1].length < 2)
+    return distance.toString() + '0';
+  return distance.toString();
+}
+
 var Station = React.createClass({
   render() {
     return (
-      <div>
-        <h2>{this.props.state.name}</h2>
-        <p>Bikes: {this.props.state.nbBikes} / {this.props.state.nbBikes + this.props.state.nbEmptyDocks}</p>
-        <p>Distance: {Math.round(this.props.state.distance * 100) / 100} miles</p>
+      <div className="row">
+        <h4 className="small-12 column">{this.props.state.name}</h4>
+        <p className="small-6 column">Bikes: {this.props.state.nbBikes} / {this.props.state.nbBikes + this.props.state.nbEmptyDocks}</p>
+        <p className="small-6 column align-right">{roundDistance(this.props.state.distance)} mi</p>
       </div>
     );
   }
 });
 
-var StationList = React.createClass({
+var LocationResults = React.createClass({
   mixins: [
     Reflux.connect(BikeStore),
     State
   ],
 
   statics: {
-    willTransitionTo() {
-      console.log('list willTransitionTo');
+    willTransitionTo(t, params, query) {
       actions.getBikes();
+
+      // if an explicit location search is performed, stop tracking
+      if (!query.tracking) {
+        actions.stopTrackLocation();
+      }
     }
   },
 
@@ -48,7 +59,7 @@ var StationList = React.createClass({
   },
 
   latLng() {
-    var coords = this.getParams().location.split(':');
+    var coords = this.getParams().location.split(',');
     return {
       lat: parseFloat(coords[0]),
       lng: parseFloat(coords[1])
@@ -56,4 +67,4 @@ var StationList = React.createClass({
   }
 });
 
-module.exports = StationList;
+module.exports = LocationResults;
