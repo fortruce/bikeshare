@@ -35,9 +35,11 @@ var LocationBar = React.createClass({
     };
   },
   componentWillReceiveProps() {
-    this.setState({
-      search: this.getSearchParam()
-    });
+    if (this.getSearchParam() !== '') {
+      this.setState({
+        search: this.getSearchParam()
+      });
+    }
   },
   render() {
     var buttonClass = this.state.tracking ? "" : " secondary";
