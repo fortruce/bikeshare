@@ -46,8 +46,7 @@ var BikeMap = React.createClass({
                           key={s.id} />);
     });
     return (
-      <Map  style={{height: '100%'}}
-            zoom={12}>
+      <Map zoom={12}>
         {markers}
       </Map>
     );

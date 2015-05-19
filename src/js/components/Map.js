@@ -43,7 +43,7 @@ var Map = React.createClass({
     return(
       <div  ref="mapHolder"
             style={this.props.style}
-            className={this.props.className}>
+            className={this.props.className + "map_container"}>
         {children}
       </div>
     );

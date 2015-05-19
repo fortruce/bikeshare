@@ -14,7 +14,7 @@ var App = React.createClass({
   render() {
     return (
       <div className="row">
-        <div className="column small-12 large-8 large-offset-2">
+        <div className="column small-12 large-10 large-offset-1">
           <RouteHandler/>
         </div>
       </div>
@@ -23,11 +23,13 @@ var App = React.createClass({
 });
 
 var routes = (
-  <Route path="/" handler={App}>
-    <DefaultRoute handler={LocationBar} />
-    <Route name="near" path="near" handler={LocationBar}>
-      <Route name="location" path="location/:location" handler={LocationResults} />
-      <Route name="search" path="search/:search" handler={SearchResults} />
+  <Route path="/">
+    <Route path="/" handler={App}>
+      <DefaultRoute handler={LocationBar} />
+      <Route name="near" path="near" handler={LocationBar}>
+        <Route name="location" path="location/:location" handler={LocationResults} />
+        <Route name="search" path="search/:search" handler={SearchResults} />
+      </Route>
     </Route>
     <Route name="map" handler={BikeMap} />
   </Route>

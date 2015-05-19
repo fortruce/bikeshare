@@ -1,8 +1,11 @@
 @import 'vendor/normalize';
 @import 'vendor/foundation';
 
-html, body, #container, #map_canvas {
+html,
+body,
+#container {
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -10,8 +13,11 @@ body {
   padding: 0;
 }
 
-#map_canvas {
-  width: 100%
+div.map_container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .align-right {
