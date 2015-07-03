@@ -41,12 +41,6 @@ export default class Search extends React.Component {
     const locationActive = this.context.router.isActive('/nearby') &&
                           !this.context.router.isActive('/nearby/');
 
-
-        // 
-                      // <a className="btn col s2"
-                      // type="submit"
-                      // onClick={this.handleSearch}>
-
     return (
       <nav>
         <div className="nav-wrapper blue lighten-2">
