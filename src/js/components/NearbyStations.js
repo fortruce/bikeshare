@@ -54,10 +54,12 @@ export default class NearbyStations extends React.Component {
   render() {
     if (!this.state.loc) {
       return (
-        <div className="preloader-wrapper big active primary-spinner">
-          <div className="spinner-layer spinner-blue-only">
-            <div className="circle-clipper left">
-              <div className="circle"></div>
+        <div>
+          <div className="preloader-wrapper big active primary-spinner">
+            <div className="spinner-layer spinner-blue-only">
+              <div className="circle-clipper left">
+                <div className="circle"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -83,9 +85,9 @@ export default class NearbyStations extends React.Component {
     }
 
     return (
-      <div className="row">
+      <div>
         <div className="center-align results-header">Stations near: {near}</div>
-        <div className="collection col s12 m8 offset-m2">
+        <div className="collection">
           {stations}
         </div>
       </div>
