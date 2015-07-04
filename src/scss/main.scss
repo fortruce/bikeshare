@@ -47,12 +47,14 @@ body {
   }
 }
 
-.input-field {
+nav .input-field {
   input[type=search]:focus {
     color: $font-primary;
-    & + label i {
-      color: inherit;
-    }
+  }
+
+  input[type=search] {
+    padding: 0;
+    width: 100%;
   }
 }
 
@@ -67,4 +69,16 @@ body {
 .results-header {
   font-size: 1.3rem;
   margin: 1.2rem auto;
+}
+
+a {
+  position: relative;
+  transition-property: left, top;
+  transition-duration: .5s;
+  transition-timing-function: ease-in-out;
+
+  &:active {
+    top: 3px;
+    left: 3px;
+  }
 }

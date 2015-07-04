@@ -67,10 +67,12 @@ export default class NearbyStations extends React.Component {
     const stations = this.state.loc ?
       sortByDistanceTo(
         this.state.loc,
-        this.props.stations).map((s) => (
+        this.props.stations
+      ).map((s) => (
           <Station
             state={s}
-            key={s.id} />))
+            key={s.id} />)
+      ).slice(0, 15)
       : '';
 
     var near = 'You';
