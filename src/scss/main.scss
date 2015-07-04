@@ -68,7 +68,7 @@ nav .input-field {
 
 .results-header {
   font-size: 1.3rem;
-  margin: 1.2rem auto;
+  margin: 18px auto;
 }
 
 a {
@@ -81,4 +81,15 @@ a {
     top: 3px;
     left: 3px;
   }
+}
+
+.search-bar {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+}
+
+.main-content {
+  margin-top: 82px;
 }

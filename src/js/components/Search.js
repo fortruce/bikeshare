@@ -42,7 +42,7 @@ export default class Search extends React.Component {
                           !this.context.router.isActive('/nearby/');
 
     return (
-      <nav>
+      <nav className="search-bar">
         <div className="nav-wrapper blue lighten-2">
           <form onSubmit={(e) => {e.preventDefault()}}>
             <div className="row">

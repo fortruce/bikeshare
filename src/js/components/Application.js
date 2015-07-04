@@ -10,7 +10,7 @@ export default class Application extends React.Component {
     return (
       <div>
         <Search {...this.props} />
-        <div className="container">
+        <div className="main-content container">
             {this.props.children}
         </div>
       </div>
