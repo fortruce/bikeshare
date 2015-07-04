@@ -74,6 +74,7 @@ function xmlToJson(xml, callback) {
 
 app.get('/bikes', function(req, res) {
   res.set('Content-Type', 'application/json');
+  res.set('Cache-Control', 'no-store');
 
   if (!_bikes)
     return res.status(500).send(JSON.stringify(_err || {error: 'No bike data available'}));
