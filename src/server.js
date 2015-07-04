@@ -9,11 +9,11 @@ var compression = require('compression');
 
 
 app.use(compression());
-// cache static resources for 1 day
+// cache static resources for 30 day
 app.use(
   express.static(path.join(__dirname, '..', 'build'),
   {
-    maxAge: '1d'
+    maxAge: '30d'
   }
 ));
 
