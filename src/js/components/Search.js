@@ -66,10 +66,13 @@ export default class Search extends React.Component {
                   value={this.state.search}
                   placeholder="Search by Address or Place" />
               </div>
-              <div className="col s2 l3 center-align"
-                 onClick={this.handleSearch}>
+              <a href="#" className="col s2 l3 center-align"
+                 onClick={(e) => {
+                  e.preventDefault();
+                  this.handleSearch();
+                 }}>
                  <i className="material-icons">send</i>
-              </div>
+              </a>
             </div>
           </form>
         </div>
