@@ -8,12 +8,14 @@ var babelify = require('babelify');
 var reload = browserSync.reload;
 var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 
 var paths = {
   app: './src/js/index.js',
   src: 'src/js/**/*.js',
   buildJs: 'build/js/',
   html: 'src/index.html',
+  prodhtml: 'src/prod.html',
   build: 'build/',
   server: './src/server.js',
   scss: 'src/scss/main.scss',
@@ -80,6 +82,10 @@ gulp.task('production', ['build'], function () {
   gulp.src(paths.minifyCss)
       .pipe(minifyCss())
       .pipe(gulp.dest(paths.css));
+
+  gulp.src(paths.prodhtml)
+      .pipe(rename('index.html'))
+      .pipe(gulp.dest(paths.build))
 });
 
 gulp.task('browserSync', ['watch'], function() {
