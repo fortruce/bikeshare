@@ -47,12 +47,14 @@ body {
   }
 }
 
-.input-field {
+nav .input-field {
   input[type=search]:focus {
     color: $font-primary;
-    & + label i {
-      color: inherit;
-    }
+  }
+
+  input[type=search] {
+    padding: 0;
+    width: 100%;
   }
 }
 
