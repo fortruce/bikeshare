@@ -1,4 +1,3 @@
-@import 'vendor/normalize';
 @import 'vendor/materialize';
 
 $background-highlight: #fefefe;
@@ -12,15 +11,11 @@ body {
 
 .primary-spinner {
   display: block;
-  margin: 80px auto;
+  margin: 140px auto;
 }
 
 .nav-wrapper i {
   line-height: 56px;
-}
-
-.nav-wrapper .row .col {
-  padding: 0 .35rem;
 }
 
 .result {
@@ -68,7 +63,7 @@ nav .input-field {
 
 .results-header {
   font-size: 1.3rem;
-  margin: 1.2rem auto;
+  margin: 18px auto;
 }
 
 a {
@@ -81,4 +76,42 @@ a {
     top: 3px;
     left: 3px;
   }
+}
+
+.search-bar {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+}
+
+.main-content {
+  margin-top: 64px;
+}
+
+@media (min-width: 993px) {
+  .l0 {
+    display: none;
+  }
+
+  .row .col {
+    padding: 0 .6rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .s0 {
+    display: none;
+  }
+
+  .row .col {
+    padding: 0;
+  }
+}
+
+.menu {
+  background-color: $background-highlight;
+  position: fixed;
+  width: 25%;
+  height: 100%;
 }

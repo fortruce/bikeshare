@@ -48,9 +48,9 @@ export default class SearchResults extends React.Component {
     ));
 
     return (
-      <div className="row">
+      <div>
         <div className="center-align results-header">Did you mean...</div>
-        <div className="collection col s12 m8 offset-m2">
+        <div className="collection">
           {results}
         </div>
       </div>

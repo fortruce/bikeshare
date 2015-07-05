@@ -42,7 +42,7 @@ export default class Search extends React.Component {
                           !this.context.router.isActive('/nearby/');
 
     return (
-      <nav>
+      <nav className="search-bar">
         <div className="nav-wrapper blue lighten-2">
           <form onSubmit={(e) => {e.preventDefault()}}>
             <div className="row">
@@ -55,7 +55,7 @@ export default class Search extends React.Component {
                   </i>
                 </Link>
               </div>
-              <div className="col s8 l6 input-field">
+              <div className="col s8 l9 input-field">
                 <input
                   className="center-align"
                   id="search"
@@ -66,12 +66,8 @@ export default class Search extends React.Component {
                   value={this.state.search}
                   placeholder="Search by Address or Place" />
               </div>
-              <a href="#" className="col s2 l3 center-align"
-                 onClick={(e) => {
-                  e.preventDefault();
-                  this.handleSearch();
-                 }}>
-                 <i className="material-icons">send</i>
+              <a href="#" className="col s2 l0 center-align">
+                 <i className="material-icons">menu</i>
               </a>
             </div>
           </form>
