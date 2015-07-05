@@ -6,6 +6,7 @@ import { sortByDistanceTo, decodeComponent } from '../utils';
 import shallowEqual from 'redux/lib/utils/shallowEqual';
 
 import { startTrackingLocation, stopTrackingLocation } from '../actions/location';
+import LoadingSpinner from './LoadingSpinner';
 
 function getLocation(props) {
   if (props.params && props.params.latlng) {
@@ -53,17 +54,7 @@ export default class NearbyStations extends React.Component {
 
   render() {
     if (!this.state.loc) {
-      return (
-        <div>
-          <div className="preloader-wrapper big active primary-spinner">
-            <div className="spinner-layer spinner-blue-only">
-              <div className="circle-clipper left">
-                <div className="circle"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
+      return <LoadingSpinner />;
     }
 
     const stations = this.state.loc ?
