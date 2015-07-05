@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Search from './Search';
-import Menu from './Menu';
 import BodyContent from './BodyContent';
 
 export default class Application extends React.Component {
@@ -13,7 +12,6 @@ export default class Application extends React.Component {
       <div>
         <Search {...this.props} />
         <div className="main-content row">
-          <Menu />
           <BodyContent>
             {this.props.children}
           </BodyContent>
