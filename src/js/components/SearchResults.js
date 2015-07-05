@@ -3,10 +3,12 @@ import { connect } from 'redux/react';
 import { search } from '../actions/search';
 import { decodeComponent, stringifyLatLng } from '../utils';
 import { Link } from 'react-router';
+import LoadingSpinner from './LoadingSpinner';
 
 @connect(state => ({
   results: state.search.results,
-  query: state.search.query
+  query: state.search.query,
+  inProgress: state.search.inProgress
 }))
 export default class SearchResults extends React.Component {
   static contextTypes = {
@@ -25,6 +27,11 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
+    // If search is in progress, display loading spinner
+    if (this.props.inProgress) {
+      console.log('loading spinner');
+      return <LoadingSpinner />;
+    }
     // If results is empty (still loading), don't display anything
     // otherwise, 'Did you mean...' will flash on screen before redirect
     // if only 1 result is found thru search

@@ -3,13 +3,18 @@ import assign from 'object-assign';
 
 const initialState = {
   results: [],
-  query: undefined
+  query: undefined,
+  inProgress: false
 }
 
 const actionsMap = {
-  [constants.SEARCH]: (state, action) => ({
+  [constants.SEARCH_COMPLETED]: (state, action) => ({
     results: action.results,
-    query: action.query
+    query: action.query,
+    inProgress: false
+  }),
+  [constants.SEARCH_STARTED]: (state, action) => ({
+    inProgress: true
   })
 };
 

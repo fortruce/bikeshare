@@ -24,6 +24,10 @@ const placesService = new google.maps.places.PlacesService(map);
 // Else emit a SEARCH action with the SearchResults
 export function search(query, router) {
 	return dispatch => {
+		dispatch({
+			type: constants.SEARCH_STARTED
+		});
+
 		placesService.textSearch({
 			query: query,
 			location: dcLatLng,
@@ -37,19 +41,11 @@ export function search(query, router) {
 				router.replaceWith('/nearby/' + latlng, { name: results[0].name });
 			} else {
 				return dispatch({
-					type: constants.SEARCH,
+					type: constants.SEARCH_COMPLETED,
 					results: results,
 					query: query
 				});
 			}
 		});
-	}
-}
-
-function cacheSearch(latlng, result) {
-	return {
-		type: constants.CACHE_SEARCH,
-		loc: latlng,
-		result: result
 	}
 }
