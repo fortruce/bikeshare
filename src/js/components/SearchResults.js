@@ -29,8 +29,7 @@ export default class SearchResults extends React.Component {
   render() {
     // If search is in progress, display loading spinner
     if (this.props.inProgress) {
-      console.log('loading spinner');
-      return <LoadingSpinner />;
+      return <LoadingSpinner title={'Searching for ' + this.props.query} />;
     }
     // If results is empty (still loading), don't display anything
     // otherwise, 'Did you mean...' will flash on screen before redirect

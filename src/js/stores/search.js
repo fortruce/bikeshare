@@ -10,10 +10,10 @@ const initialState = {
 const actionsMap = {
   [constants.SEARCH_COMPLETED]: (state, action) => ({
     results: action.results,
-    query: action.query,
     inProgress: false
   }),
   [constants.SEARCH_STARTED]: (state, action) => ({
+    query: action.query,
     inProgress: true
   })
 };
