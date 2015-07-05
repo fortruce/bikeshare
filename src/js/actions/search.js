@@ -25,7 +25,8 @@ const placesService = new google.maps.places.PlacesService(map);
 export function search(query, router) {
 	return dispatch => {
 		dispatch({
-			type: constants.SEARCH_STARTED
+			type: constants.SEARCH_STARTED,
+			query: query
 		});
 
 		placesService.textSearch({

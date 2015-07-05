@@ -53,8 +53,15 @@ export default class NearbyStations extends React.Component {
   }
 
   render() {
+    let near = 'You';
+    if (this.context.router.isActive('/nearby/')) {
+      near = this.props.location.query ? 
+                    decodeComponent(this.props.location.query.name)
+                    : this.props.params.latlng;
+    }
+
     if (!this.state.loc) {
-      return <LoadingSpinner />;
+      return <LoadingSpinner title={'Loading Stations near ' + near}/>;
     }
 
     const stations = this.state.loc ?
@@ -67,13 +74,6 @@ export default class NearbyStations extends React.Component {
             key={s.id} />)
       ).slice(0, 15)
       : '';
-
-    var near = 'You';
-    if (this.context.router.isActive('/nearby/')) {
-      near = this.props.location.query ? 
-                decodeComponent(this.props.location.query.name)
-              : this.props.params.latlng;
-    }
 
     return (
       <div>
