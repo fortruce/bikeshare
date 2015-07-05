@@ -46,7 +46,7 @@ export default class Search extends React.Component {
         <div className="nav-wrapper blue lighten-2">
           <form onSubmit={(e) => {e.preventDefault()}}>
             <div className="row">
-              <div className="col s2 center-align">
+              <div className="col s2 l3 center-align">
                 <Link to="/nearby">
                   <i className={classnames('medium material-icons',
                                             {'white-text': locationActive},
@@ -55,7 +55,7 @@ export default class Search extends React.Component {
                   </i>
                 </Link>
               </div>
-              <div className="col s8 input-field">
+              <div className="col s8 l6 input-field">
                 <input
                   className="center-align"
                   id="search"
@@ -66,7 +66,7 @@ export default class Search extends React.Component {
                   value={this.state.search}
                   placeholder="Search by Address or Place" />
               </div>
-              <div className="s2"></div>
+              <div className="s2 l3"></div>
             </div>
           </form>
         </div>
