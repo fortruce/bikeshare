@@ -103,7 +103,8 @@ gulp.task('production', ['build'], function () {
         locals: {
           jsVersion: timestamp,
           cssVersion: timestamp,
-          apiKey: 'AIzaSyAy32eRHwC-BSVox87dj7PHUR3Q8hgyZnA'
+          apiKey: 'AIzaSyAy32eRHwC-BSVox87dj7PHUR3Q8hgyZnA',
+          production: true
         }
       }))
       .pipe(gulp.dest(paths.build.dist))
