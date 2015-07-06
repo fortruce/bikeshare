@@ -11,7 +11,7 @@ var compression = require('compression');
 app.use(compression());
 // cache static resources for 30 day
 app.use(
-  express.static(path.join(__dirname, '..', 'build'),
+  express.static(path.join(__dirname, 'dist'),
   {
     maxAge: '30d'
   }
