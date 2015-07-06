@@ -4,11 +4,13 @@ import { search } from '../actions/search';
 import { decodeComponent, stringifyLatLng } from '../utils';
 import { Link } from 'react-router';
 import LoadingSpinner from './LoadingSpinner';
+import Notification from './Notification';
 
 @connect(state => ({
   results: state.search.results,
   query: state.search.query,
-  inProgress: state.search.inProgress
+  inProgress: state.search.inProgress,
+  error: state.search.error
 }))
 export default class SearchResults extends React.Component {
   static contextTypes = {
@@ -28,16 +30,26 @@ export default class SearchResults extends React.Component {
 
   render() {
     // If search is in progress, display loading spinner
+    //    This has the side affect of not displaying old search results
     if (this.props.inProgress) {
       return <LoadingSpinner title={'Searching for ' + this.props.query} />;
     }
-    // If results is empty (still loading), don't display anything
-    // otherwise, 'Did you mean...' will flash on screen before redirect
-    // if only 1 result is found thru search
-    // Also, only display results if the query matches the current search
-    if (this.props.results.length === 0 ||
-        this.props.query !== decodeComponent(this.props.params.search))
-      return null;
+
+    if (this.props.results.error) {
+      return (
+        <Notification>
+          Oops! Something went wrong :(
+        </Notification>
+      );
+    }
+
+    if (this.props.results.length === 0) {
+      return (
+        <Notification>
+          There were no results found for {this.props.query}
+        </Notification>
+      );
+    }
 
     const results = this.props.results.map((r, i) => (
       <div className="collection-item result" key={i}>

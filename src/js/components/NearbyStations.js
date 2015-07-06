@@ -55,7 +55,7 @@ export default class NearbyStations extends React.Component {
   render() {
     let near = 'You';
     if (this.context.router.isActive('/nearby/')) {
-      near = this.props.location.query ? 
+      near = this.props.location.query ?
                     decodeComponent(this.props.location.query.name)
                     : this.props.params.latlng;
     }

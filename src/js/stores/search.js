@@ -3,8 +3,9 @@ import assign from 'object-assign';
 
 const initialState = {
   results: [],
-  query: undefined,
-  inProgress: false
+  query: null,
+  inProgress: false,
+  error: null
 }
 
 const actionsMap = {
@@ -14,7 +15,12 @@ const actionsMap = {
   }),
   [constants.SEARCH_STARTED]: (state, action) => ({
     query: action.query,
-    inProgress: true
+    inProgress: true,
+    error: null
+  }),
+  [constants.SEARCH_ERROR]: (state, action) => ({
+    error: action.error,
+    inProgress: false
   })
 };
 

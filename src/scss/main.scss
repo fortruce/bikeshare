@@ -9,12 +9,9 @@ body {
   background-color: $background;
 }
 
-.loading {
+.notification {
   margin: 100px auto;
-
-  &__title {
-    font-size: 1.6rem;
-  }
+  font-size: 1.6rem;
 
   &__spinner {
     display: block;

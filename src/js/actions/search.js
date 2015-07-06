@@ -34,8 +34,13 @@ export function search(query, router) {
 			location: dcLatLng,
 			radius: dcRadius
 		}, (results, status) => {
-			if (status !== google.maps.places.PlacesServiceStatus.OK)
-				return console.log('ERROR: Places search failed - ', status);
+			if (status !== google.maps.places.PlacesServiceStatus.OK &&
+					status !== google.maps.places.PlacesServiceStatus.ZERO_RESULTS)
+				return dispatch({
+					type: constants.SEARCH_ERROR,
+					error: status
+				})
+
 			if (results.length === 1) {
 				const latlng = stringifyLatLng(results[0].geometry.location);
 
