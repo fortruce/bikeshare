@@ -7,7 +7,7 @@ var babelify = require('babelify');
 var reload = browserSync.reload;
 var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
-var accord = require('gulp-accord');
+var jade = require('gulp-jade');
 
 var paths = {
   src: {
@@ -67,7 +67,7 @@ gulp.task('browserify', function () {
 // Compile the HTML Jade template with dev values
 gulp.task('html-dev', function() {
   gulp.src(paths.src.html)
-      .pipe(accord('jade', { apiKey: 'AIzaSyBabMnLGTxsntL_Ufw0K9VVGax8N1DUQM0'}))
+      .pipe(jade({ locals: { apiKey: 'AIzaSyBabMnLGTxsntL_Ufw0K9VVGax8N1DUQM0' }}))
       .pipe(gulp.dest(paths.build.dist))
 });
 
@@ -99,10 +99,12 @@ gulp.task('production', ['build'], function () {
 
   var timestamp = Date.now();
   gulp.src(paths.src.html)
-      .pipe(accord('jade', {
-        jsVersion: timestamp,
-        cssVersion: timestamp,
-        apiKey: 'AIzaSyAy32eRHwC-BSVox87dj7PHUR3Q8hgyZnA'
+      .pipe(jade({
+        locals: {
+          jsVersion: timestamp,
+          cssVersion: timestamp,
+          apiKey: 'AIzaSyAy32eRHwC-BSVox87dj7PHUR3Q8hgyZnA'
+        }
       }))
       .pipe(gulp.dest(paths.build.dist))
 });
