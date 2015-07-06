@@ -2,13 +2,13 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var browserSync = require('browser-sync').create();
-var nodemon = require('gulp-nodemon');
 var sass = require('gulp-sass');
 var babelify = require('babelify');
 var reload = browserSync.reload;
 var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var accord = require('gulp-accord');
 
 var paths = {
   app: './src/js/index.js',
@@ -23,7 +23,8 @@ var paths = {
   css: 'build/css/',
   staticDir: 'src/static/**/*',
   minifyCss: 'build/css/**/*.css',
-  minifyJs: 'build/js/**/*.js'
+  minifyJs: 'build/js/**/*.js',
+  htmlJade: 'src/index.jade'
 };
 
 gulp.task('static', function () {
@@ -52,28 +53,22 @@ gulp.task('browserify', function () {
           .pipe(gulp.dest(paths.buildJs));
 });
 
-gulp.task('html', function() {
-  gulp.src(paths.html)
-      .pipe(gulp.dest(paths.build));
+gulp.task('html-dev', function() {
+  gulp.src(paths.htmlJade)
+      .pipe(accord('jade', { apiKey: 'AIzaSyBabMnLGTxsntL_Ufw0K9VVGax8N1DUQM0'}))
+      .pipe(gulp.dest(paths.build))
 });
 
 gulp.task('watch', ['build'], function () {
   gulp.watch(paths.src, ['browserify']);
-  gulp.watch(paths.html, ['html']);
+  gulp.watch(paths.htmlJade, ['html-dev']);
   gulp.watch(paths.scssDir, ['scss']);
 
   gulp.watch(paths.buildJs + '*.js').on('change', reload);
   gulp.watch(paths.build + '*.html').on('change', reload);
 });
 
-gulp.task('server', function() {
-  nodemon({
-    script: paths.server,
-    watch: [paths.server]
-  }).on('start', reload);
-});
-
-gulp.task('build', ['static', 'browserify', 'html', 'scss']);
+gulp.task('build', ['static', 'browserify', 'html-dev', 'scss']);
 gulp.task('production', ['build'], function () {
   gulp.src(paths.minifyJs)
       .pipe(uglify())
@@ -83,8 +78,13 @@ gulp.task('production', ['build'], function () {
       .pipe(minifyCss())
       .pipe(gulp.dest(paths.css));
 
-  gulp.src(paths.prodhtml)
-      .pipe(rename('index.html'))
+  var timestamp = Date.now();
+  gulp.src(paths.htmlJade)
+      .pipe(accord('jade', {
+        jsVersion: timestamp,
+        cssVersion: timestamp,
+        apiKey: 'AIzaSyAy32eRHwC-BSVox87dj7PHUR3Q8hgyZnA'
+      }))
       .pipe(gulp.dest(paths.build))
 });
 
