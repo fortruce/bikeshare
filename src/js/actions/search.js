@@ -39,7 +39,7 @@ export function search(query, router) {
 				return dispatch({
 					type: constants.SEARCH_ERROR,
 					error: status
-				})
+				});
 
 			if (results.length === 1) {
 				const latlng = stringifyLatLng(results[0].geometry.location);
