@@ -32,6 +32,7 @@ body {
   &__title {
     font-size: 1.5rem;
     margin: 5px auto;
+    margin-right: .5rem;
 
     a {
       @extend .cyan-text, .text-darken-3;

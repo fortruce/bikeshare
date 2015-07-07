@@ -31,7 +31,7 @@ export default class Station extends React.Component {
     return (
       <div className="collection-item result">
         <div className="row">
-          <div className="col s9 l7">
+          <div className="col s9 m7">
             <div className="result__title">
               <a href={makeMapsLink('Current+Location',
                                     stringifyLatLng({
@@ -43,10 +43,10 @@ export default class Station extends React.Component {
             </div>
             <p className="result__subtitle">Distance: {roundDistance(this.props.state.distance)} mi</p>
           </div>
-          <div className="result__info col s1 l2 right-align">
+          <div className="result__info col s1 m2 right-align">
             <span>{this.props.state.nbBikes} </span><i className="material-icons">directions_bike</i>
           </div>
-          <div className="result__info col s1 offset-s1 offset-l1 l2 right-align">
+          <div className="result__info col s1 offset-s1 offset-m1 m2 right-align">
             <span>{this.props.state.nbEmptyDocks}</span> <i className="material-icons">space_bar</i>
           </div>
         </div>
