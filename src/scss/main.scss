@@ -8,6 +8,7 @@
 
 @import 'vendor/materialize/global';
 @import 'vendor/materialize/grid';
+@import 'vendor/materialize/preloader';
 
 $background-highlight: #fefefe;
 $background: #efefef;
@@ -33,16 +34,6 @@ $font-primary: #665555;
 body {
   color: $font-primary;
   background-color: $background;
-}
-
-.notification {
-  margin: 100px auto;
-  font-size: 1.6rem;
-
-  &__spinner {
-    display: block;
-    margin: 40px auto;
-  }
 }
 
 .result {

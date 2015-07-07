@@ -6,7 +6,9 @@ export default class LoadingSpinner extends React.Component {
     return (
       <Notification>
         <div>{this.props.title || 'Loading...'}</div>
-        <div className="preloader-wrapper big active notification__spinner">
+        <div style={{
+          margin: '40px 0'
+        }} className="preloader-wrapper big active">
           <div className="spinner-layer spinner-blue-only">
             <div className="circle-clipper left">
               <div className="circle"></div>
