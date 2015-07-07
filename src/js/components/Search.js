@@ -2,12 +2,13 @@ import React, { findDOMNode, PropTypes } from 'react';
 import { encodeComponent, decodeComponent } from '../utils';
 import { Link } from 'react-router';
 import classnames from 'classnames';
+import Radium from 'radium';
 
+@Radium
 export default class Search extends React.Component {
   static propTypes = {
-    params: PropTypes.shape({
-      search: PropTypes.string
-    })
+    search: PropTypes.string.isRequired,
+    style: PropTypes.object
   }
 
   static contextTypes = {
@@ -24,53 +25,30 @@ export default class Search extends React.Component {
 
     // Pull the initial state from the url params
     this.state = {
-      search: props.params && props.params.search || ''
+      search: this.props.search
     }
   }
 
   // Update the internal state when routing changes occur
   componentWillReceiveProps(nextProps) {
-    if (this.state.search !== nextProps.params.search) {
+    if (this.state.search !== nextProps.search) {
       this.setState({
-        search: nextProps.params.search
+        search: nextProps.search
       });
     }
   }
 
   render() {
-    const locationActive = this.context.router.isActive('/nearby') &&
-                          !this.context.router.isActive('/nearby/');
-
     return (
-      <nav className="search-bar">
-        <div className="nav-wrapper blue lighten-2">
-          <form onSubmit={(e) => {e.preventDefault()}}>
-            <div className="row">
-              <div className="col s2 l3 center-align">
-                <Link to="/nearby">
-                  <i className={classnames('medium material-icons',
-                                            {'white-text': locationActive},
-                                            {'grey-text text-lighten-2': !locationActive})}>
-                    {locationActive ? 'my_location' : 'location_disabled'}
-                  </i>
-                </Link>
-              </div>
-              <div className="col s8 l6 input-field">
-                <input
-                  className="center-align"
-                  id="search"
-                  type="search"
-                  ref="search"
-                  onKeyUp={this.handleOnKeyUp}
-                  onChange={this.handleOnChange}
-                  value={this.state.search}
-                  placeholder="Search by Address or Place" />
-              </div>
-              <div className="s2 l3"></div>
-            </div>
-          </form>
-        </div>
-      </nav>
+      <input
+        id="search"
+        type="search"
+        ref="search"
+        style={this.props.style}
+        onKeyUp={this.handleOnKeyUp}
+        onChange={this.handleOnChange}
+        value={this.state.search}
+        placeholder="Search by Address or Place" />
     );
   }
 

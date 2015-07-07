@@ -1,8 +1,34 @@
-@import 'vendor/materialize';
+// @import 'vendor/materialize';
+@import 'vendor/materialize/prefixer';
+@import 'vendor/materialize/mixins';
+@import 'vendor/materialize/color';
+@import 'vendor/materialize/variables';
+
+@import 'vendor/materialize/normalize';
+
+@import 'vendor/materialize/global';
+@import 'vendor/materialize/grid';
 
 $background-highlight: #fefefe;
 $background: #efefef;
 $font-primary: #665555;
+
+// Style Placeholders
+::-webkit-input-placeholder {
+   color: lighten($input-border-color, 20%);
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: lighten($input-border-color, 20%);
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: lighten($input-border-color, 20%);
+}
+
+:-ms-input-placeholder {
+   color: lighten($input-border-color, 20%);
+}
 
 body {
   color: $font-primary;
@@ -17,10 +43,6 @@ body {
     display: block;
     margin: 40px auto;
   }
-}
-
-.nav-wrapper i {
-  line-height: 56px;
 }
 
 .result {
@@ -48,17 +70,6 @@ body {
   }
 }
 
-nav .input-field {
-  input[type=search]:focus {
-    color: $font-primary;
-  }
-
-  input[type=search] {
-    padding: 0;
-    width: 100%;
-  }
-}
-
 .collection {
   margin-top: 0;
   background-color: $background-highlight;
@@ -72,24 +83,17 @@ nav .input-field {
   margin: 18px auto;
 }
 
-a {
-  position: relative;
-  transition-property: left, top;
-  transition-duration: .5s;
-  transition-timing-function: ease-in-out;
+// a {
+//   position: relative;
+//   transition-property: left, top;
+//   transition-duration: .5s;
+//   transition-timing-function: ease-in-out;
 
-  &:active {
-    top: 3px;
-    left: 3px;
-  }
-}
-
-.search-bar {
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  left: 0;
-}
+//   &:active {
+//     top: 3px;
+//     left: 3px;
+//   }
+// }
 
 .main-content {
   margin-top: 64px;
@@ -113,11 +117,4 @@ a {
   .row .col {
     padding: 0;
   }
-}
-
-.menu {
-  background-color: $background-highlight;
-  position: fixed;
-  width: 25%;
-  height: 100%;
 }
