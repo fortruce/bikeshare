@@ -9,6 +9,12 @@ var compression = require('compression');
 
 
 app.use(compression());
+app.use(function dontCacheIndex(req, res, next) {
+  if (req.url === '/') {
+    res.set('Cache-Control', 'no-store');
+  }
+  next();
+});
 // cache static resources for 30 day
 app.use(
   express.static(path.join(__dirname, 'dist'),
