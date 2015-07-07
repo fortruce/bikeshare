@@ -18,6 +18,7 @@ const styles = {
     top: 0,
     left: 0,
     width: '100%',
+    fontSize: '1.4rem',
     boxShadow: '0 2px 5px 0 ' +
                color('#000').alpha(.16).hslString() +
                ',0 2px 10px 0 ' +
@@ -29,11 +30,12 @@ const styles = {
     boxShadow: 'none',
     border: 'none',
     textAlign: 'center',
-    color: '#665555',
     transition: 'all .3s',
+    color: '#fff',
 
     ':focus': {
       backgroundColor: '#fff',
+      color: '#665555',
       outline: 'none'
     }
   }

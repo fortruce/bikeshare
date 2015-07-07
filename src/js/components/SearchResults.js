@@ -5,6 +5,25 @@ import { decodeComponent, stringifyLatLng } from '../utils';
 import { Link } from 'react-router';
 import LoadingSpinner from './LoadingSpinner';
 import Notification from './Notification';
+import Collection from './Collection';
+import CollectionHeader from './CollectionHeader';
+
+const styles = {
+  result: {
+    fontSize: '1rem',
+  },
+  title: {
+    fontSize: '1.5rem'
+  },
+  subtitle: {
+    lineHeight: '1.5rem',
+    marginBottom: 0,
+    marginTop: '5px'
+  },
+  row: {
+    margin: '0'
+  }
+}
 
 @connect(state => ({
   results: state.search.results,
@@ -51,26 +70,28 @@ export default class SearchResults extends React.Component {
       );
     }
 
-    const results = this.props.results.map((r, i) => (
-      <div className="collection-item result" key={i}>
-        <div className="result__title">
+    const results = this.props.results.map((r) => (
+      <div style={ styles.result }>
+        <div style={ styles.title }>
           <Link to={"/nearby/" + stringifyLatLng(r.geometry.location)}
                 query={{name: r.name}}>
             {r.name}
           </Link>
         </div>
-        <div className="row">
-          <p className="result__subtitle col offset-s1">@ {r.formatted_address}</p>
+        <div  style={ styles.row }
+              className="row">
+          <p  style={ styles.subtitle }
+              className="col offset-s1">@ {r.formatted_address}</p>
         </div>
       </div>
     ));
 
     return (
       <div>
-        <div className="center-align results-header">Did you mean...</div>
-        <div className="collection">
+        <CollectionHeader>Did you mean...</CollectionHeader>
+        <Collection>
           {results}
-        </div>
+        </Collection>
       </div>
     );
   }

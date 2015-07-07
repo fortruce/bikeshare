@@ -9,10 +9,18 @@
 @import 'vendor/materialize/global';
 @import 'vendor/materialize/grid';
 @import 'vendor/materialize/preloader';
+@import 'vendor/materialize/typography';
 
 $background-highlight: #fefefe;
 $background: #efefef;
 $font-primary: #665555;
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 // Style Placeholders
 ::-webkit-input-placeholder {
@@ -34,60 +42,6 @@ $font-primary: #665555;
 body {
   color: $font-primary;
   background-color: $background;
-}
-
-.result {
-  font-size: 1rem;
-
-  .row {
-    margin-bottom: 0px;
-  }
-  &__title {
-    font-size: 1.5rem;
-    margin: 5px auto;
-    margin-right: .5rem;
-
-    a {
-      @extend .cyan-text, .text-darken-3;
-      text-decoration: underline;
-    }
-  }
-  &__subtitle {
-    margin: 0 auto;
-  }
-  &__info {
-    margin: 16px auto 0px auto;
-    font-size: 1.8rem;
-  }
-}
-
-.collection {
-  margin-top: 0;
-  background-color: $background-highlight;
-  .collection-item {
-    background-color: inherit;
-  }
-}
-
-.results-header {
-  font-size: 1.3rem;
-  margin: 18px auto;
-}
-
-// a {
-//   position: relative;
-//   transition-property: left, top;
-//   transition-duration: .5s;
-//   transition-timing-function: ease-in-out;
-
-//   &:active {
-//     top: 3px;
-//     left: 3px;
-//   }
-// }
-
-.main-content {
-  margin-top: 64px;
 }
 
 @media (min-width: 993px) {
