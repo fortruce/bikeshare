@@ -8,7 +8,10 @@ import Radium from 'radium';
 export default class Search extends React.Component {
   static propTypes = {
     search: PropTypes.string.isRequired,
-    style: PropTypes.object
+    style: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object
+    ])
   }
 
   static contextTypes = {
