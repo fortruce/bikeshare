@@ -13,6 +13,8 @@ const styles = {
     height: '64px'
   },
   nav: {
+    display: 'flex',
+    justifyContent: 'space-between',
     position: 'fixed',
     zIndex: '20',
     top: 0,
@@ -24,19 +26,22 @@ const styles = {
                ',0 2px 10px 0 ' +
                color('#000').alpha(.12).hslString()
   },
+  searchWrap: {
+    flex: '1 0 70%',
+    position: 'relative'
+  },
+  gpsWrap: {
+    flex: '0 0 15%'
+  },
+  afterSearch: {
+    flex: '0 0 15%'
+  },
   search: {
-    padding: 0,
-    width: '100%',
-    boxShadow: 'none',
-    border: 'none',
-    textAlign: 'center',
-    transition: 'all .3s',
     color: '#fff',
 
     ':focus': {
       backgroundColor: '#fff',
       color: '#665555',
-      outline: 'none'
     }
   }
 }
@@ -59,21 +64,19 @@ export default class NavBar extends React.Component {
               styles.both,
               styles.nav
             ]}>
-        <div className="row">
-          <div className="col s2 l3">
-            <GpsIcon disabled={!gpsActive} />
-          </div>
-          <div className="col s8 l6">
-            <Search search={this.props.search}
-                    style={[
-                      // manually include base styles here instead of inherit
-                      // for IE support
-                      styles.both,
-                      styles.search
-                    ]} />
-          </div>
-          <div className="col s2 l3"></div>
+        <div style={ styles.gpsWrap }>
+          <GpsIcon disabled={!gpsActive} />
         </div>
+        <div style={ styles.searchWrap }>
+          <Search search={this.props.search}
+                  styles={[
+                    // manually include base styles here instead of inherit
+                    // for IE support
+                    styles.both,
+                    styles.search
+                  ]} />
+        </div>
+        <div style={ styles.afterSearch }></div>
       </nav>
     );
   }

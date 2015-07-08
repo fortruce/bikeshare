@@ -4,6 +4,21 @@ import { Link } from 'react-router';
 import classnames from 'classnames';
 import Radium from 'radium';
 
+const styles = {
+  padding: 0,
+  width: '100%',
+  border: 'none',
+  boxShadow: 'none',
+  textAlign: 'center',
+  transition: 'all .3s',
+  color: '#665555',
+  backgroundColor: '#fff',
+
+  ':focus': {
+    'outline': 'none'
+  }
+}
+
 @Radium
 export default class Search extends React.Component {
   static propTypes = {
@@ -47,7 +62,10 @@ export default class Search extends React.Component {
         id="search"
         type="search"
         ref="search"
-        style={this.props.style}
+        style={[
+          styles,
+          ...this.props.styles
+        ]}
         onKeyUp={this.handleOnKeyUp}
         onChange={this.handleOnChange}
         value={this.state.search}
