@@ -15,11 +15,9 @@ export default class Application extends React.Component {
     return (
       <div>
         <NavBar search={this.props.params && this.props.params.search || ''} />
-        <div className="main-content row">
-          <BodyContent>
-            {this.props.children}
-          </BodyContent>
-        </div>
+        <BodyContent>
+          {this.props.children}
+        </BodyContent>
       </div>
     )
   }

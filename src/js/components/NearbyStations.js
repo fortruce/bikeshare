@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'redux/react';
-import Station from './Station';
 
 import { sortByDistanceTo, decodeComponent } from '../utils';
 import shallowEqual from 'redux/lib/utils/shallowEqual';
@@ -9,6 +8,7 @@ import { startTrackingLocation, stopTrackingLocation } from '../actions/location
 import LoadingSpinner from './LoadingSpinner';
 import Collection from './Collection';
 import CollectionHeader from './CollectionHeader';
+import StationRow from './StationRow';
 
 function getLocation(props) {
   if (props.params && props.params.latlng) {
@@ -70,9 +70,10 @@ export default class NearbyStations extends React.Component {
       sortByDistanceTo(
         this.state.loc,
         this.props.stations
-      ).map((s) => (
-          <Station
-            state={s} />)
+      ).map((s, i) => (
+          <StationRow
+            station={s}
+            key={i} />)
       ).slice(0, 15)
       : '';
 
