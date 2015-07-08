@@ -6,7 +6,11 @@ const styles = {
     fontSize: '1.6rem',
     display: 'flex',
     flexFlow: 'row wrap',
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
+
+    '@media (max-width: 550px)': {
+      justifyContent: 'center'
+    }
   }
 }
 
@@ -14,7 +18,7 @@ const styles = {
 export default class TextIcon extends React.Component {
   render() {
     return (
-      <div style={ styles.base }>
+      <div key="container" style={ styles.base }>
         <div>{this.props.text}</div>
         <div style={ this.props.styles.icon }><i className="material-icons">{this.props.icon}</i></div>
       </div>

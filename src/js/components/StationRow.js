@@ -46,7 +46,7 @@ const styles = {
     justifyContent: 'space-between'
   },
   icon: {
-    flex: '0 0 auto',
+    flex: '0 0 60px',
     '@media (max-width: 550px)': {
       flex: '0 0 30px'
     }
