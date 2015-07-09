@@ -1,0 +1,61 @@
+.navbar {
+  background-color: $navbar-color;
+
+  line-height: $navbar-height;
+  height: $navbar-height;
+
+  @media screen and (min-width: $break-navbar) {
+    line-height: $navbar-height-tall;
+    height: $navbar-height-tall;
+  }
+
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 1.4rem;
+  box-shadow: 0 2px 5px 0 hsla(0, 0, 0, .16), 0 2px 10px 0 hsla(0, 0, 0, .12);
+
+  &__icon {
+    flex: 0 0 15%;
+
+    .icon i {
+      color: #fff;
+      line-height: $navbar-height;
+      font-size: 2rem;
+
+      &.disabled {
+        color: $inactive;
+      }
+
+      @media screen and (min-width: $break-navbar) {
+        line-height: $navbar-height-tall;
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  &__search {
+    flex: 0 0 70%;
+
+    .search {
+      color: #fff;
+      background-color: $navbar-color;
+
+      height: $navbar-height;
+      line-height: $navbar-height;
+      @media screen and (min-width: $break-navbar) {
+        height: $navbar-height-tall;
+        line-height: $navbar-height-tall;
+      }
+
+      &:focus {
+        color: $font-primary;
+        background-color: #fff;
+      }
+    }
+  }
+}

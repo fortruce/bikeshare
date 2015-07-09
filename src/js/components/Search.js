@@ -1,32 +1,10 @@
 import React, { findDOMNode, PropTypes } from 'react';
 import { encodeComponent, decodeComponent } from '../utils';
 import { Link } from 'react-router';
-import classnames from 'classnames';
-import Radium from 'radium';
 
-const styles = {
-  padding: 0,
-  width: '100%',
-  border: 'none',
-  boxShadow: 'none',
-  textAlign: 'center',
-  transition: 'all .3s',
-  color: '#665555',
-  backgroundColor: '#fff',
-
-  ':focus': {
-    'outline': 'none'
-  }
-}
-
-@Radium
 export default class Search extends React.Component {
   static propTypes = {
-    search: PropTypes.string.isRequired,
-    style: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.object
-    ])
+    search: PropTypes.string.isRequired
   }
 
   static contextTypes = {
@@ -62,10 +40,7 @@ export default class Search extends React.Component {
         id="search"
         type="search"
         ref="search"
-        style={[
-          styles,
-          ...this.props.styles
-        ]}
+        className="search"
         onKeyUp={this.handleOnKeyUp}
         onChange={this.handleOnChange}
         value={this.state.search}

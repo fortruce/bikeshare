@@ -1,0 +1,13 @@
+.title-group {
+  .title-group__main {
+    font-size: 1.4rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .title-group__sub {
+    font-size: 1rem;
+  }
+}

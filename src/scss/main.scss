@@ -1,19 +1,20 @@
-// @import 'vendor/materialize';
-@import 'vendor/materialize/prefixer';
-@import 'vendor/materialize/mixins';
 @import 'vendor/materialize/color';
 @import 'vendor/materialize/variables';
 
 @import 'vendor/materialize/normalize';
-
-@import 'vendor/materialize/global';
-@import 'vendor/materialize/grid';
 @import 'vendor/materialize/preloader';
 @import 'vendor/materialize/typography';
 
-$background-highlight: #fefefe;
-$background: #efefef;
-$font-primary: #665555;
+@import 'variables';
+@import 'navbar';
+@import 'search';
+@import 'body';
+@import 'collection';
+@import 'icon';
+@import 'notification';
+@import 'title-group';
+@import 'text-icon';
+@import 'station-row';
 
 html {
   box-sizing: border-box;
@@ -22,21 +23,25 @@ html {
   box-sizing: inherit;
 }
 
+a {
+  color: $link-primary;
+}
+
 // Style Placeholders
 ::-webkit-input-placeholder {
-   color: lighten($input-border-color, 20%);
+   color: $inactive;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: lighten($input-border-color, 20%);
+   color: $inactive;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: lighten($input-border-color, 20%);
+   color: $inactive;
 }
 
 :-ms-input-placeholder {
-   color: lighten($input-border-color, 20%);
+   color: $inactive;
 }
 
 body {

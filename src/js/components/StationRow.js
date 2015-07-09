@@ -1,5 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
 import TextIcon from './TextIcon';
 import TitleGroup from './TitleGroup';
 
@@ -30,38 +29,6 @@ function makeMapsLink(from, to) {
   }).replace('%2B', '+').replace('%2C', ',');
 }
 
-const styles = {
-  container: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  titleGroup: {
-    flex: '0 0 70%'
-  },
-  iconGroup: {
-    flex: '0 0 25%',
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  icon: {
-    flex: '0 0 60px',
-    '@media (max-width: 550px)': {
-      flex: '0 0 30px'
-    }
-  },
-  textIcon: {
-    icon: {
-      marginLeft: '8px',
-      '@media (max-width: 550px)': {
-        marginLeft: '0px'
-      }
-    }
-  }
-}
-
-@Radium
 export default class StationRow extends React.Component {
   render() {
     const mapsHref = makeMapsLink(
@@ -73,22 +40,16 @@ export default class StationRow extends React.Component {
     );
 
     return (
-      <div style={ styles.container }>
-        <div style={ styles.titleGroup }>
+      <div className="station-row">
+        <div className="station-row__details">
           <TitleGroup main={ <a href={ mapsHref }>{this.props.station.name}</a> }
                       sub={ 'Distance: ' + roundDistance(this.props.station.distance) } />
         </div>
-        <div style={ styles.iconGroup }>
-          <div key="1" style={ styles.icon }>
-            <TextIcon icon="directions_bike"
-                      text={ this.props.station.nbBikes }
-                      styles={ styles.textIcon } />
-          </div>
-          <div key="2" style={ styles.icon }>
-            <TextIcon icon="space_bar"
-                      text={ this.props.station.nbEmptyDocks }
-                      styles={ styles.textIcon } />
-          </div>
+        <div className="station-row__icons">
+          <TextIcon icon="directions_bike"
+                    text={ this.props.station.nbBikes } />
+          <TextIcon icon="space_bar"
+                    text={ this.props.station.nbEmptyDocks } />
         </div>
       </div>
     );

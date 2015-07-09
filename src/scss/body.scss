@@ -1,0 +1,31 @@
+.body {
+  width: 100%;
+  min-width: 300px;
+  position: relative;
+  top: $navbar-height;
+  margin: 0 auto;
+
+  @media screen and (min-width: $break-navbar) {
+    top: $navbar-height-tall;
+  }
+
+  @media screen and (min-width: $break-xsmall) {
+    width: 95%;
+  }
+
+  @media screen and (min-width: $break-small) {
+    width: 80%;
+  }
+
+  @media screen and (min-width: $break-medium) {
+    width: 70%;
+  }
+
+  @media screen and (min-width: $break-large) {
+    width: 60%;
+  }
+
+  @media screen and (min-width: $break-xlarge) {
+    width: 50%;
+  }
+}

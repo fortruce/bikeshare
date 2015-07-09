@@ -6,7 +6,6 @@ import { Link } from 'react-router';
 import LoadingSpinner from './LoadingSpinner';
 import Notification from './Notification';
 import Collection from './Collection';
-import CollectionHeader from './CollectionHeader';
 import TitleGroup from './TitleGroup';
 
 @connect(state => ({
@@ -35,7 +34,11 @@ export default class SearchResults extends React.Component {
     // If search is in progress, display loading spinner
     //    This has the side affect of not displaying old search results
     if (this.props.inProgress) {
-      return <LoadingSpinner title={'Searching for ' + this.props.query} />;
+      return (
+        <Notification>
+          <LoadingSpinner title={'Searching for ' + this.props.query} />
+        </Notification>
+      );
     }
 
     if (this.props.results.error) {
@@ -67,8 +70,7 @@ export default class SearchResults extends React.Component {
 
     return (
       <div>
-        <CollectionHeader>Did you mean...</CollectionHeader>
-        <Collection>
+        <Collection header="Did you mean...">
           {results}
         </Collection>
       </div>

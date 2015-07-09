@@ -1,0 +1,22 @@
+// Screen Breakpoints
+$break-xsmall: 480px;
+$break-small: 768px;
+$break-medium: 992px;
+$break-large: 1200px;
+$break-xlarge: 1400px;
+
+$break-navbar: $break-small;
+
+$navbar-color: #64b5f6;
+$navbar-height: 48px;
+$navbar-height-tall: 64px;
+
+$background-highlight: #fefefe;
+$background: #efefef;
+$font-primary: darken(#666, 20);
+
+$link-primary: #1e88e5;
+
+$inactive: lighten(#c0c0c0, 5);
+
+$collection-border-color: #e0e0e0;

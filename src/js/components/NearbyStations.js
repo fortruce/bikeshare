@@ -7,7 +7,6 @@ import shallowEqual from 'redux/lib/utils/shallowEqual';
 import { startTrackingLocation, stopTrackingLocation } from '../actions/location';
 import LoadingSpinner from './LoadingSpinner';
 import Collection from './Collection';
-import CollectionHeader from './CollectionHeader';
 import StationRow from './StationRow';
 
 function getLocation(props) {
@@ -79,10 +78,7 @@ export default class NearbyStations extends React.Component {
 
     return (
       <div>
-        <CollectionHeader>
-          Stations near: {near}
-        </CollectionHeader>
-        <Collection>
+        <Collection header={ 'Stations near ' + near }>
           {stations}
         </Collection>
       </div>
