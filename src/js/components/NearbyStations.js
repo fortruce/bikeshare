@@ -8,6 +8,7 @@ import { startTrackingLocation, stopTrackingLocation } from '../actions/location
 import LoadingSpinner from './LoadingSpinner';
 import Collection from './Collection';
 import StationRow from './StationRow';
+import Notification from './Notification';
 
 function getLocation(props) {
   if (props.params && props.params.latlng) {
@@ -62,7 +63,11 @@ export default class NearbyStations extends React.Component {
     }
 
     if (!this.state.loc) {
-      return <LoadingSpinner title={'Loading Stations near ' + near}/>;
+      return (
+        <Notification>
+          <LoadingSpinner title={'Loading Stations near ' + near}/>
+        </Notification>
+      );
     }
 
     const stations = this.state.loc ?
