@@ -8,6 +8,7 @@ var reload = browserSync.reload;
 var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var jade = require('gulp-jade');
+var autoprefixer = require('gulp-autoprefixer');
 
 var paths = {
   src: {
@@ -45,6 +46,7 @@ gulp.task('server', function () {
 gulp.task('scss', function () {
   gulp.src(paths.src.css)
       .pipe(sass())
+      .pipe(autoprefixer())
       .pipe(gulp.dest(paths.build.css))
       .pipe(reload({stream: true}));
 });
