@@ -43,23 +43,3 @@ body {
   color: $font-primary;
   background-color: $background;
 }
-
-@media (min-width: 993px) {
-  .l0 {
-    display: none;
-  }
-
-  .row .col {
-    padding: 0 .6rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .s0 {
-    display: none;
-  }
-
-  .row .col {
-    padding: 0;
-  }
-}

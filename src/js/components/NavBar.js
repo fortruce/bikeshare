@@ -7,7 +7,6 @@ import GpsIcon from './GpsIcon';
 
 const styles = {
   both: {
-    boxSizing: 'border-box',
     backgroundColor: '#64b5f6',
     lineHeight: '64px',
     height: '64px'
