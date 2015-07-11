@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import Search from './Search';
 import GpsIcon from './GpsIcon';
+import TextIcon from '../TextIcon';
 
 export default class NavBar extends React.Component {
   static PropTypes = {
-    search: PropTypes.string.isRequired
+    search: PropTypes.string.isRequired,
+    menuToggle: PropTypes.func.isRequired
   }
 
   static contextTypes = {
@@ -22,7 +24,12 @@ export default class NavBar extends React.Component {
         <div className="navbar__search">
           <Search search={this.props.search}/>
         </div>
-        <div className="navbar__icon"></div>
+        <div className="navbar__icon menu__toggle">
+          <div className="icon">
+            <i className="material-icons"
+               onClick={ this.props.menuToggle }>menu</i>
+          </div>
+        </div>
       </nav>
     );
   }
