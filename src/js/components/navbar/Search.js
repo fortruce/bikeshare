@@ -1,5 +1,5 @@
 import React, { findDOMNode, PropTypes } from 'react';
-import { encodeComponent, decodeComponent } from '../utils';
+import { encodeComponent, decodeComponent } from '../../utils';
 import { Link } from 'react-router';
 
 export default class Search extends React.Component {

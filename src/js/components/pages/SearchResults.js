@@ -1,12 +1,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'redux/react';
-import { search } from '../actions/search';
-import { decodeComponent, stringifyLatLng } from '../utils';
 import { Link } from 'react-router';
-import LoadingSpinner from './LoadingSpinner';
-import Notification from './Notification';
-import Collection from './Collection';
-import TitleGroup from './TitleGroup';
+
+// utility functions
+import { search } from '../../actions/search';
+import { decodeComponent, stringifyLatLng } from '../../utils';
+
+// components
+import LoadingSpinner from '../LoadingSpinner';
+import Notification from '../containers/Notification';
+import Collection from '../containers/Collection';
+import TitleGroup from '../TitleGroup';
 
 @connect(state => ({
   results: state.search.results,

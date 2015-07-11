@@ -1,14 +1,17 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'redux/react';
 
-import { sortByDistanceTo, decodeComponent } from '../utils';
+// utility functions
+import { sortByDistanceTo, decodeComponent } from '../../utils';
+import { startTrackingLocation, stopTrackingLocation } from '../../actions/location';
 import shallowEqual from 'redux/lib/utils/shallowEqual';
 
-import { startTrackingLocation, stopTrackingLocation } from '../actions/location';
-import LoadingSpinner from './LoadingSpinner';
-import Collection from './Collection';
-import StationRow from './StationRow';
-import Notification from './Notification';
+// Components
+import Collection from '../containers/Collection';
+import Notification from '../containers/Notification';
+import LoadingSpinner from '../LoadingSpinner';
+import StationRow from '../StationRow';
+
 
 function getLocation(props) {
   if (props.params && props.params.latlng) {
@@ -18,13 +21,19 @@ function getLocation(props) {
   return { loc: props.loc };
 }
 
+// Indicates if the current props state should be tracking location
 // If the route is /nearby/lat,lng then stop location tracking
 // If the route is /nearby then ensure location tracking is enabled
+function shouldBeTracking(props) {
+  return !(props.params && props.params.latlng);
+}
+
 function toggleTracking(props) {
-  if (props.params && props.params.latlng)
-    return props.dispatch(stopTrackingLocation());
-  else
-    return props.dispatch(startTrackingLocation());
+  if (shouldBeTracking(props)) {
+    props.dispatch(startTrackingLocation());
+  } else {
+    props.dispatch(stopTrackingLocation());
+  }
 }
 
 @connect(state => ({
@@ -58,8 +67,8 @@ export default class NearbyStations extends React.Component {
     let near = 'You';
     if (this.context.router.isActive('/nearby/')) {
       near = this.props.location.query ?
-                    decodeComponent(this.props.location.query.name)
-                    : this.props.params.latlng;
+              decodeComponent(this.props.location.query.name) :
+              this.props.params.latlng;
     }
 
     if (!this.state.loc) {

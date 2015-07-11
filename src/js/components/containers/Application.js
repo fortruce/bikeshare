@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
-import Search from './Search';
 import BodyContent from './BodyContent';
-import NavBar from './NavBar';
+import NavBar from '../navbar/NavBar';
 
 export default class Application extends React.Component {
   static propTypes = {

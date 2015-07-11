@@ -3,10 +3,12 @@ import { Redirect, Router, Route } from 'react-router';
 import { Provider } from 'redux/react';
 import { createRedux, composeStores, createDispatcher } from 'redux';
 import thunkMiddleware from 'redux/lib/middleware/thunk';
-import * as components from '../components';
-import * as stores from '../stores';
-import { queryStations } from '../actions/stations';
-import * as tutorial from '../components/tutorial';
+
+import * as components from './components';
+import * as stores from './stores';
+import * as tutorials from './components/tutorials';
+
+import { queryStations } from './actions/stations';
 
 const {
   Application,
@@ -38,7 +40,7 @@ export default class App extends React.Component {
 
     this._interval = setInterval(() => {
       redux.dispatch(queryStations());
-    }, 30000);
+    }, 60000);
   }
 
   componentWillUnmount() {
@@ -64,7 +66,7 @@ function renderRoutes(history) {
         </Route>
         <Route path="search/:search" component={SearchResults} />
         <Route path="tutorial">
-          <Route path="intro" component={tutorial.Intro} />
+          <Route path="intro" component={tutorials.Intro} />
           <Redirect from="/tutorial" to="/tutorial/intro" />
         </Route>
         <Redirect from="/" to="/nearby" />

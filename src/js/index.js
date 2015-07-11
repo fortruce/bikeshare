@@ -1,8 +1,8 @@
 import React from 'react';
 import HashHistory from 'react-router/lib/HashHistory';
-import App from './containers/App';
+import Root from './Root';
 
 React.render(
-  <App history={new HashHistory()} />,
+  <Root history={new HashHistory()} />,
   document.getElementById('container')
 );

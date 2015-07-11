@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 export default class Collection extends React.Component {
+  static propTypes = {
+    header: PropTypes.string,
+    children: PropTypes.array.isRequired
+  }
+
   render() {
     const header = this.props.header ?
                     <div className="collection__header">
