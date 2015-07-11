@@ -67,7 +67,6 @@ function renderRoutes(history) {
         <Route path="search/:search" component={SearchResults} />
         <Route path="tutorial">
           <Route path="intro" component={tutorials.Intro} />
-          <Redirect from="/tutorial" to="/tutorial/intro" />
         </Route>
         <Redirect from="/" to="/nearby" />
       </Route>
