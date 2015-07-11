@@ -11,6 +11,17 @@ export default class Application extends React.Component {
     children: PropTypes.any
   }
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+
+  componentWillMount() {
+    if (!window.localStorage.getItem('tutorial')) {
+      window.localStorage.setItem('tutorial', true);
+      this.context.router.transitionTo('/tutorial/intro');
+    }
+  }
+
   render() {
     return (
       <div>

@@ -6,6 +6,7 @@ import thunkMiddleware from 'redux/lib/middleware/thunk';
 import * as components from '../components';
 import * as stores from '../stores';
 import { queryStations } from '../actions/stations';
+import * as tutorial from '../components/tutorial';
 
 const {
   Application,
@@ -62,6 +63,10 @@ function renderRoutes(history) {
           <Route name="latlng" path=":latlng" component={NearbyStations} />
         </Route>
         <Route path="search/:search" component={SearchResults} />
+        <Route path="tutorial">
+          <Route path="intro" component={tutorial.Intro} />
+          <Redirect from="/tutorial" to="/tutorial/intro" />
+        </Route>
         <Redirect from="/" to="/nearby" />
       </Route>
     </Router>
