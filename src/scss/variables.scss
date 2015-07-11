@@ -6,9 +6,10 @@ $break-large: 1200px;
 $break-xlarge: 1400px;
 
 $break-navbar: $break-small;
+$break-menu: $break-medium;
 
 $navbar-color: #64b5f6;
-$navbar-height: 48px;
+$navbar-height: 56px;
 $navbar-height-tall: 64px;
 
 $background-highlight: #fefefe;
@@ -20,3 +21,5 @@ $link-primary: #1e88e5;
 $inactive: lighten(#c0c0c0, 5);
 
 $collection-border-color: #e0e0e0;
+
+$menu-width: 20%;

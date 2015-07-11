@@ -1,0 +1,65 @@
+// default, menu is hidden and not active
+#layout {
+  display: block;
+  position: relative;
+  padding-left: 0;
+
+  transition: padding .5s ease;
+
+  #menu {
+    position: fixed;
+    // hide overflow when left: -% value is smaller
+    // than width of menu content (bleeding into screen when hidden)
+    overflow: hidden;
+    z-index: 100;
+    top: 0;
+    left: -$menu-width;
+    transition: left .5s ease, width .5s ease;
+    bottom: 0;
+    width: $menu-width;
+    max-width: 300px;
+    background-color: white;
+    border-right: 1px solid $collection-border-color;
+
+    .menu__header {
+      line-height: 64px;
+      border-bottom: 1px solid $collection-border-color;
+      text-align: center;
+    }
+  }
+
+  #main {
+    position: relative;
+    top: 0;
+
+    .navbar {
+      transition: width .5s ease;
+      width: 100%;
+    }
+  }
+}
+
+// menu is hidden, but toggled active
+@media screen and (max-width: $break-menu - 1) {
+  #layout {
+    #menu.active {
+      left: 0;
+      width: 250px;
+    }
+  }
+}
+
+// menu is always on screen
+@media screen and (min-width: $break-menu) {
+  #layout {
+    padding-left: $menu-width;
+    #menu {
+      left: 0;
+    }
+    #main {
+      .navbar {
+        width: 100% - $menu-width;
+      }
+    }
+  }
+}
