@@ -43,7 +43,8 @@
   #layout {
     #menu.active {
       left: 0;
-      width: 250px;
+      width: 50%;
+      min-width: 250px;
     }
   }
 }
@@ -52,6 +53,11 @@
 @media screen and (min-width: $break-menu) {
   #layout {
     padding-left: $menu-width;
+
+    .menu__toggle {
+        visibility: hidden;
+    }
+
     #menu {
       left: 0;
     }

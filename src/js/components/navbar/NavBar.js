@@ -24,8 +24,8 @@ export default class NavBar extends React.Component {
         <div className="navbar__search">
           <Search search={this.props.search}/>
         </div>
-        <div className="navbar__icon menu__toggle">
-          <div className="icon">
+        <div className="navbar__icon">
+          <div className="icon  menu__toggle">
             <i className="material-icons"
                onClick={ this.props.menuToggle }>menu</i>
           </div>
