@@ -21,7 +21,11 @@
     border-right: 1px solid $collection-border-color;
 
     .menu__header {
-      line-height: 64px;
+      line-height: $navbar-height;
+      @media screen and (min-width: $break-navbar) {
+          line-height: $navbar-height-tall;
+      }
+
       border-bottom: 1px solid $collection-border-color;
       text-align: center;
     }
@@ -43,7 +47,6 @@
   #layout {
     #menu.active {
       left: 0;
-      width: 50%;
       min-width: 250px;
     }
   }
