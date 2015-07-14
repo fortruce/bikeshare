@@ -13,12 +13,14 @@
 @import 'icon';
 @import 'notification';
 @import 'title-group';
-@import 'text-icon';
+@import 'label-icon';
 @import 'station-row';
 @import 'layout';
+@import 'menu';
 
 html {
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 *, *:before, *:after {
   box-sizing: inherit;

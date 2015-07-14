@@ -1,5 +1,5 @@
 import React from 'react';
-import TextIcon from './TextIcon';
+import LabeledIcon from './pure/LabeledIcon';
 import TitleGroup from './TitleGroup';
 
 import url from 'url';
@@ -46,10 +46,12 @@ export default class StationRow extends React.Component {
                       sub={ 'Distance: ' + roundDistance(this.props.station.distance) } />
         </div>
         <div className="station-row__icons">
-          <TextIcon icon="directions_bike"
-                    text={ this.props.station.nbBikes } />
-          <TextIcon icon="space_bar"
-                    text={ this.props.station.nbEmptyDocks } />
+          <LabeledIcon icon="directions_bike"
+                       label={ this.props.station.nbBikes }
+                       position="before" />
+          <LabeledIcon icon="space_bar"
+                       label={ this.props.station.nbEmptyDocks }
+                       position="before" />
         </div>
       </div>
     );

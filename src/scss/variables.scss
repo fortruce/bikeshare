@@ -13,7 +13,7 @@ $navbar-height: 56px;
 $navbar-height-tall: 64px;
 
 $background-highlight: #fefefe;
-$background: #efefef;
+$background: rgba(0, 0, 0, .04);
 $font-primary: darken(#666, 20);
 
 $link-primary: #1e88e5;
@@ -22,4 +22,4 @@ $inactive: lighten(#c0c0c0, 5);
 
 $collection-border-color: #e0e0e0;
 
-$menu-width: 20%;
+$menu-width: 250px;

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Search from './Search';
 import GpsIcon from './GpsIcon';
-import TextIcon from '../TextIcon';
 
 export default class NavBar extends React.Component {
   static PropTypes = {
