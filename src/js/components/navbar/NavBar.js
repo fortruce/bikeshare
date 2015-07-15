@@ -9,7 +9,8 @@ import GpsIcon from '../pure/GpsIcon';
 export default class NavBar extends React.Component {
   static PropTypes = {
     search: PropTypes.string.isRequired,
-    menuToggle: PropTypes.func.isRequired
+    menuToggle: PropTypes.func.isRequired,
+    isToggled: PropTypes.bool.isRequired
   }
 
   static contextTypes = {
@@ -17,7 +18,7 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    const { search, menuToggle, disabled } = this.props;
+    const { search, menuToggle, disabled, isToggled } = this.props;
 
     return (
       <nav  className="navbar">
@@ -31,7 +32,7 @@ export default class NavBar extends React.Component {
         <div className="navbar__icon">
           <div className="icon  menu__toggle">
             <i className="material-icons"
-               onClick={ menuToggle }>menu</i>
+               onClick={ menuToggle }>{ isToggled ? 'close' : 'menu' }</i>
           </div>
         </div>
       </nav>

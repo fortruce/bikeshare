@@ -34,7 +34,8 @@ export default class Application extends React.Component {
         </div>
         <div id="main">
           <NavBar search={this.props.params && this.props.params.search || ''}
-                  menuToggle={() => this.setState({ active: !this.state.active })} />
+                  menuToggle={() => this.setState({ active: !this.state.active })}
+                  isToggled={this.state.active} />
           <BodyContent>
             { this.props.children }
           </BodyContent>
