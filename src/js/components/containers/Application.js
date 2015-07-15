@@ -26,16 +26,25 @@ export default class Application extends React.Component {
     }
   }
 
+  closeMenu = () => {
+    this.setState({ active: false });
+  }
+  openMenu = () => {
+    this.setState({ active: true });
+  }
+
   render() {
     return (
       <div id="layout">
         <div id="menu" className={ this.state.active ? 'active' : ''} >
-          <Menu />
+          <Menu closeMenu={this.closeMenu}
+                active={this.state.active} />
         </div>
         <div id="main">
           <NavBar search={this.props.params && this.props.params.search || ''}
-                  menuToggle={() => this.setState({ active: !this.state.active })}
-                  isToggled={this.state.active} />
+                  closeMenu={this.closeMenu}
+                  openMenu={this.openMenu}
+                  active={this.state.active} />
           <BodyContent>
             { this.props.children }
           </BodyContent>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Link from '../pure/Link';
 import LabeledIcon from '../pure/LabeledIcon';
 import { Link as RouterLink } from 'react-router';
@@ -18,6 +18,26 @@ function renderLinks(links) {
 }
 
 export default class Menu extends React.Component {
+  static propTypes = {
+    closeMenu: PropTypes.func.isRequired,
+    active: PropTypes.bool.isRequired
+  }
+
+  componentWillMount() {
+    document.body.addEventListener('click', this.documentClickHandler);
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('click', this.documentClickHandler);
+  }
+
+  documentClickHandler = (e) => {
+    if (this.props.active) {
+      this.props.closeMenu();
+      e.stopPropagation();
+    }
+  }
+
   render() {
     const links = [
       { link: '/', title: 'Favorites', icon: 'favorite_border' },
