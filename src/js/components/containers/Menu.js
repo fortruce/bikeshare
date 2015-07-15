@@ -6,14 +6,14 @@ import { Link as RouterLink } from 'react-router';
 const GITHUB_LINK = 'https://github.com/fortruce/bikeshare';
 
 function renderLinks(links) {
-  return links.map(link => (
-    <li className="menu__links__link">
-      <Link {...link}>
+  return links.map((link, key) => (
+    <Link {...link} key={key}>
+      <li className="menu__links__link">
         <LabeledIcon label={link.title}
                      position="after"
                      icon={link.icon} />
-      </Link>
-    </li>
+      </li>
+    </Link>
   ))
 }
 
