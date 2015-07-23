@@ -13,7 +13,8 @@ import { queryStations } from './actions/stations';
 const {
   Application,
   NearbyStations,
-  SearchResults
+  SearchResults,
+  About
 } = components;
 
 function logMiddleware(next) {
@@ -68,6 +69,7 @@ function renderRoutes(history) {
         <Route path="tutorial">
           <Route path="intro" component={tutorials.Intro} />
         </Route>
+        <Route path="about" component={About} />
         <Redirect from="/" to="/nearby" />
       </Route>
     </Router>
