@@ -17,6 +17,7 @@
 @import 'station-row';
 @import 'layout';
 @import 'menu';
+@import 'text-post';
 
 html {
   box-sizing: border-box;
@@ -50,4 +51,8 @@ a {
 body {
   color: $font-primary;
   background-color: $background;
+}
+
+.center {
+  text-align: center;
 }

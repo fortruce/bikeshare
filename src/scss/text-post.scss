@@ -1,0 +1,13 @@
+.text-post {
+  background: $background-highlight;
+  border: 1px solid $collection-border-color;
+  padding: 20px 40px;
+  margin-top: 40px;
+
+  h1, h2, h3, h4, h5, h6 { margin: 0; }
+
+  &__header {
+    padding: 20px 0px;
+    text-align: center;
+  }
+}
