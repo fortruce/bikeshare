@@ -7,7 +7,7 @@ import { search } from '../../actions/search';
 import { decodeComponent, stringifyLatLng } from '../../utils';
 
 // components
-import LoadingSpinner from '../LoadingSpinner';
+import LoadingSpinner from '../pure/LoadingSpinner';
 import Notification from '../containers/Notification';
 import Collection from '../containers/Collection';
 import TitleGroup from '../TitleGroup';

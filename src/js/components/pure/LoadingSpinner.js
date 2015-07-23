@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 export default class LoadingSpinner extends React.Component {
+  static propTypes = {
+    title: PropTypes.string
+  }
+
   render() {
     return (
       <div>

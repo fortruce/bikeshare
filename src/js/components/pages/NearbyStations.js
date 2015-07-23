@@ -9,7 +9,7 @@ import shallowEqual from 'redux/lib/utils/shallowEqual';
 // Components
 import Collection from '../containers/Collection';
 import Notification from '../containers/Notification';
-import LoadingSpinner from '../LoadingSpinner';
+import LoadingSpinner from '../pure/LoadingSpinner';
 import StationRow from '../StationRow';
 
 
