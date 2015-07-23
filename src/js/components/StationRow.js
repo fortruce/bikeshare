@@ -47,10 +47,10 @@ export default class StationRow extends React.Component {
         </div>
         <div className="station-row__icons">
           <LabeledIcon icon="directions_bike"
-                       label={ this.props.station.nbBikes }
+                       label={ this.props.station.nbBikes.toString() }
                        position="before" />
           <LabeledIcon icon="space_bar"
-                       label={ this.props.station.nbEmptyDocks }
+                       label={ this.props.station.nbEmptyDocks.toString() }
                        position="before" />
         </div>
       </div>
