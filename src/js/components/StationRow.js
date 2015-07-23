@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import LabeledIcon from './pure/LabeledIcon';
 import TitleGroup from './TitleGroup';
 
@@ -30,6 +30,17 @@ function makeMapsLink(from, to) {
 }
 
 export default class StationRow extends React.Component {
+  static propTypes = {
+    station: PropTypes.shape({
+      distance: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      nbBikes: PropTypes.number.isRequired,
+      nbEmptyDocks: PropTypes.number.isRequired,
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired
+    }).isRequired
+  }
+
   render() {
     const mapsHref = makeMapsLink(
       'Current+Location',
@@ -43,7 +54,7 @@ export default class StationRow extends React.Component {
       <div className="station-row">
         <div className="station-row__details">
           <TitleGroup main={ <a href={ mapsHref }>{this.props.station.name}</a> }
-                      sub={ 'Distance: ' + roundDistance(this.props.station.distance) } />
+                      sub={ 'Distance: ' + roundDistance(this.props.station.distance) + ' mi'} />
         </div>
         <div className="station-row__icons">
           <LabeledIcon icon="directions_bike"
