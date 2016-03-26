@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "961329116691.dkr.ecr.us-east-1.amazonaws.com/bikeshare:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "3333"
+    }
+  ]
+}
