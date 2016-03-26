@@ -1,3 +1,4 @@
+require("dotenv").load();
 var gulp = require('gulp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
@@ -69,7 +70,7 @@ gulp.task('browserify', function () {
 // Compile the HTML Jade template with dev values
 gulp.task('html-dev', function() {
   gulp.src(paths.src.html)
-      .pipe(jade({ locals: { apiKey: 'AIzaSyBabMnLGTxsntL_Ufw0K9VVGax8N1DUQM0' }}))
+      .pipe(jade({ locals: { apiKey: process.env.API_KEY }}))
       .pipe(gulp.dest(paths.build.dist))
 });
 
@@ -105,7 +106,7 @@ gulp.task('production', ['build'], function () {
         locals: {
           jsVersion: timestamp,
           cssVersion: timestamp,
-          apiKey: 'AIzaSyAy32eRHwC-BSVox87dj7PHUR3Q8hgyZnA',
+          apiKey: process.env.API_KEY,
           production: true
         }
       }))
