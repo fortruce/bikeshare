@@ -12,3 +12,13 @@ Bikeshare leverages several technologies including:
 * Redux
 * Express
 * SCSS
+
+## Deployment
+
+BikeInDC is hosted on AWS and deployed using Docker and Elastic Beanstalk.
+A typical deployment follows these simple steps:
+
+* commit changes
+* run `./pushimage.sh <profile> <api_key>` to deploy docker image to ECR
+* run `cd deploy && eb deploy --profile <profile>` to deploy the new image
+to environment
